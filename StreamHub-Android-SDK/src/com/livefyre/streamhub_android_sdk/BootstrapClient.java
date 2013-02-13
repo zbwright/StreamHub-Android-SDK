@@ -9,9 +9,7 @@ import com.livefyre.streamhub_android_sdk.Helpers;
 import com.livefyre.streamhub_android_sdk.GETJSONinBackground;
 
 /**
- * 
  * @author zjj
- * A class to communicate with the bootstrap service. 
  */
 public class BootstrapClient {
 	/**	 

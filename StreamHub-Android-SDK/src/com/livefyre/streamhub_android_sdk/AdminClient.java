@@ -6,10 +6,8 @@ import java.net.URL;
 import android.net.Uri.Builder;
 import android.os.Handler.Callback;
 
-/**
- * 
+/** 
  * @author zjj
- * A class to communicate with the admin service.
  */
 public class AdminClient {
 	/**

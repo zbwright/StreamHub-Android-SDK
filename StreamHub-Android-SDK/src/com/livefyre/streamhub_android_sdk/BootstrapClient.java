@@ -13,7 +13,7 @@ import com.livefyre.streamhub_android_sdk.GETJSONinBackground;
  */
 public class BootstrapClient {
 	/**	 
-	 * Performs a network request on a different thread and calls delivers a message to the callback. A JSON object with the results will be bound to the message.
+	 * Performs a network request on a different thread and delivers a message to the callback. A JSON object with the results will be bound to the message.
 	 * 
 	 * @param articleId The Id of the collection's article.
 	 * @param siteId The Id of the article's site.

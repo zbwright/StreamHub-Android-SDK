@@ -18,7 +18,7 @@ import com.livefyre.streamhub_android_sdk.GETJSONinBackground;
  */
 public class PublicAPIClient {
 	/**
-	 * Performs a network request on a different thread and calls delivers a message to the callback. A JSON object with the results will be bound to the message.
+	 * Performs a network request on a different thread and delivers a message to the callback. A JSON object with the results will be bound to the message.
 	 * @see https://github.com/Livefyre/livefyre-docs/wiki/Trending-Collection-API
 	 * 
 	 * @param tag Tag to filter on. Optional.
@@ -70,7 +70,7 @@ public class PublicAPIClient {
 	}
 	
 	/**
-	 * Performs a network request on a different thread and calls delivers a message to the callback. A JSON object with the results will be bound to the message.
+	 * Performs a network request on a different thread and delivers a message to the callback. A JSON object with the results will be bound to the message.
 	 * @see https://github.com/Livefyre/livefyre-docs/wiki/User-Content-API
 	 * 
 	 * @param userId The Id of the user whose content is to be fetched. 

@@ -11,7 +11,7 @@ import android.os.Handler.Callback;
  */
 public class AdminClient {
 	/**
-	 * Performs a network request on a different thread and calls delivers a message to the callback. A JSON object with the results will be bound to the message.
+	 * Performs a network request on a different thread and delivers a message to the callback. A JSON object with the results will be bound to the message.
 	 * 
 	 * It is necessary to provide either a collectionId or a siteId combined with an articleId.
 	 * 

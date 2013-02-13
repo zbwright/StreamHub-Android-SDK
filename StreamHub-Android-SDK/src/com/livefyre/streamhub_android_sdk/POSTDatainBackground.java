@@ -10,7 +10,7 @@ import android.os.Handler.Callback;
  * @author zjj
  *
  */
-class POSTDatainBackground extends AsyncTask<Object, Void, Void> {
+class POSTDataInBackground extends AsyncTask<Object, Void, Void> {
 	/**
 	 * Notifies the callback with a message.
 	 * The arg1 on the message is set to an HTTP statuscode.

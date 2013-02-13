@@ -43,7 +43,7 @@ public class BootstrapClient {
 	public static URL generateInitEndpoint
 	(String articleId, String siteId, String networkDomain, String environment) throws UnsupportedEncodingException, MalformedURLException {
 		// Casting
-		String article64 = Helpers.base64String(articleId);
+		String article64 = Helpers.generateBase64String(articleId);
 		String urlSafeArticle64 = URLEncoder.encode(article64, "UTF-8");
 		// Build the URL
 		StringBuilder urlStringBuilder = new StringBuilder(Constants.scheme)
@@ -58,6 +58,6 @@ public class BootstrapClient {
 		.append(urlSafeArticle64).append("/")
 		.append("init");
 		
-		 return Helpers.buildURL(urlStringBuilder.toString());
+		 return Helpers.generateURL(urlStringBuilder.toString());
 	}
 }

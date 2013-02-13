@@ -26,7 +26,7 @@ public class StreamClient {
 	public static URL generateStreamEndpoint(Builder endpointBuilder, String eventId) throws MalformedURLException {
 		endpointBuilder.appendPath(eventId);
 		String endpointString = endpointBuilder.build().toString();
-		return Helpers.buildURL(endpointString);
+		return Helpers.generateURL(endpointString);
 	}
 	
 	public static void pollStreamEndpoint(Builder endpointBuilder, String eventId) throws IOException, JSONException {

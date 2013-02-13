@@ -8,7 +8,7 @@ import android.net.Uri.Builder;
 import android.util.Base64;
 
 public class Helpers {
-	public static String base64String(String instring) throws UnsupportedEncodingException {
+	public static String generateBase64String(String instring) throws UnsupportedEncodingException {
 		byte[]byteTransform = null;
 		String string64 = null; 
 		try {
@@ -24,7 +24,7 @@ public class Helpers {
 		return string64;
 	}
 	
-	public static URL buildURL(String instring) throws MalformedURLException {
+	public static URL generateURL(String instring) throws MalformedURLException {
 		URL url = null;
 		try {
 			url = new URL(instring);
@@ -37,7 +37,7 @@ public class Helpers {
 		return url;
 	}
 	
-	public static byte[] buildPostBody(Builder bodyBuilder) throws UnsupportedEncodingException {
+	public static byte[] generatePostBody(Builder bodyBuilder) throws UnsupportedEncodingException {
 		byte[] contentBody = null;
 		try {
 			contentBody = bodyBuilder.toString().substring(1).getBytes("UTF-8");

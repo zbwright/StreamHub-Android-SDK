@@ -7,7 +7,7 @@ import android.net.Uri.Builder;
 import android.os.Handler;
 import android.os.Handler.Callback;
 
-import com.livefyre.streamhub_android_sdk.POSTDatainBackground;
+import com.livefyre.streamhub_android_sdk.POSTDataInBackground;
 
 public class WriteClient {
 	public static void likeContentInBackground
@@ -36,14 +36,14 @@ public class WriteClient {
 		// Build the post data =
 		Builder bodyBuilder = new Uri.Builder();
 		bodyBuilder.appendQueryParameter("collection_id", collectionId);
-		return Helpers.buildPostBody(bodyBuilder);
+		return Helpers.generatePostBody(bodyBuilder);
 	}
 	
 	private static void likeOrUnlikeContentInBackground
 	(URL endpoint, String collectionId, Callback callback) throws MalformedURLException, UnsupportedEncodingException {
 		byte[] contentBody = generateLikeOrUnlikePostData(collectionId);
 		
-		new POSTDatainBackground().execute(endpoint, contentBody, callback); 
+		new POSTDataInBackground().execute(endpoint, contentBody, callback); 
 	}
 	
 	private static URL generateLikeOrUnlikeEndpoint
@@ -61,7 +61,7 @@ public class WriteClient {
 		.append(action)
 		.append(paramsBuilder.toString());
 				
-		return Helpers.buildURL(urlStringBuilder.toString());
+		return Helpers.generateURL(urlStringBuilder.toString());
 	}
 	
 	public static void postContent
@@ -69,7 +69,7 @@ public class WriteClient {
 		URL postContentEndpoint = generatePostContentURL(userToken, parentId, collectionId, networkDomain);
 		byte[] contentBody = generatePostContentBody(body);
 		
-		new POSTDatainBackground().execute(postContentEndpoint, contentBody, callback); 
+		new POSTDataInBackground().execute(postContentEndpoint, contentBody, callback); 
 	}
 	
 	public static URL generatePostContentURL
@@ -87,7 +87,7 @@ public class WriteClient {
 		.append("/post/")
 		.append(paramsBuilder.toString());
 				
-		return Helpers.buildURL(urlStringBuilder.toString());
+		return Helpers.generateURL(urlStringBuilder.toString());
 	}
 	
 	public static byte[] generatePostContentBody(String body) throws UnsupportedEncodingException {
@@ -95,6 +95,6 @@ public class WriteClient {
 		Builder bodyBuilder = new Uri.Builder();
 		bodyBuilder.appendQueryParameter("body", body);
 		
-		return Helpers.buildPostBody(bodyBuilder);
+		return Helpers.generatePostBody(bodyBuilder);
 	}
 }

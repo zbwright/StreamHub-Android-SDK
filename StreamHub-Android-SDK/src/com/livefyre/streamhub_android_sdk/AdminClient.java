@@ -50,7 +50,7 @@ public class AdminClient {
 			paramsBuilder.appendQueryParameter("collectionId", collectionId);
 			paramsBuilder.appendQueryParameter("lftoken", userToken);
 		} else {
-			String article64 = Helpers.base64String(articleId);
+			String article64 = Helpers.generateBase64String(articleId);
 			paramsBuilder.appendQueryParameter("siteId", siteId);
 			paramsBuilder.appendQueryParameter("articleId", article64);
 			paramsBuilder.appendQueryParameter("lftoken", userToken);
@@ -63,7 +63,7 @@ public class AdminClient {
 		.append("/api/v3.0/auth/")
 		.append(paramsBuilder.toString());
 		
-		URL authEndpoint = Helpers.buildURL(urlStringBuilder.toString());
+		URL authEndpoint = Helpers.generateURL(urlStringBuilder.toString());
 
 		return authEndpoint;
 	}

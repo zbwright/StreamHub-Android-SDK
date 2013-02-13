@@ -28,11 +28,11 @@ public class PublicAPIClient {
 	 * @param callback Implement "handleMessage" for this callback.
 	 * @throws MalformedURLException
 	 */
-	public static void getTrendingCollectionsInBackground
+	public static void getHottestCollectionsInBackground
 	(String tag, String siteId, String networkDomain, Integer requestResults, Callback callback) throws MalformedURLException {
-		URL trendingCollectionsEndpoint = generateTrendingCollectionsEndpoint(tag, siteId, networkDomain, requestResults);
+		URL hottestCollectionsEndpoint = generateHottestCollectionsEndpoint(tag, siteId, networkDomain, requestResults);
 		
-		new GETJSONinBackground().execute(trendingCollectionsEndpoint, callback);
+		new GETJSONinBackground().execute(hottestCollectionsEndpoint, callback);
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class PublicAPIClient {
 	 * @return Trending Collections endpoint with the specified parameters.
 	 * @throws MalformedURLException
 	 */
-	public static URL generateTrendingCollectionsEndpoint
+	public static URL generateHottestCollectionsEndpoint
 	(String tag, String siteId, String networkDomain, Integer requestResults) throws MalformedURLException {
 		// Build the Query Params
 		Builder paramsBuilder = new Builder();
@@ -66,7 +66,7 @@ public class PublicAPIClient {
 		.append("/api/v3.0/hottest/")
 		.append(paramsBuilder.toString());
 
-		return Helpers.buildURL(urlStringBuilder.toString());
+		return Helpers.generateURL(urlStringBuilder.toString());
 	}
 	
 	/**
@@ -121,6 +121,6 @@ public class PublicAPIClient {
 		.append("/comments/")
 		.append(paramsBuilder.toString());
 				
-		return Helpers.buildURL(urlStringBuilder.toString());
+		return Helpers.generateURL(urlStringBuilder.toString());
 	}
 }

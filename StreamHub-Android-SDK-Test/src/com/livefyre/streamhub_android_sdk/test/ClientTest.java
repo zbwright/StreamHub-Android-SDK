@@ -128,7 +128,7 @@ public class ClientTest extends InstrumentationTestCase {
 	public void testPublicAPIClientHotness() {
 		URL hotnessEndpoint = null;
 		try {
-			hotnessEndpoint = PublicAPIClient.generateTrendingCollectionsEndpoint("mockTag", null, networkDomain, 22);
+			hotnessEndpoint = PublicAPIClient.generateHottestCollectionsEndpoint("mockTag", null, networkDomain, 22);
 		} catch (MalformedURLException e) {
 			fail("MalformedURLException");
 		}

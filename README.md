@@ -15,7 +15,7 @@ Or, close the repo and add the streamhub_android_sdk as an Android dependency
 
 The StreamHub Android SDK exposes several Client classes that can be used to request StreamHub APIs.
 
-* `[AdminClient](http://livefyre.github.com/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/AdminClient.html)` - Exchange a user authentication token for user information, keys, and other metadata
+* [`AdminClient`](http://livefyre.github.com/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/AdminClient.html) - Exchange a user authentication token for user information, keys, and other metadata
 
 * `[BootstrapClient](http://livefyre.github.com/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/BootstrapClient.html)` - Get recent Content and metadata about a particular Collection
 

@@ -1,4 +1,4 @@
-package com.livefyre.streamhub_android_sdk;
+package com.livefyre.android.core;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -27,7 +27,7 @@ public class POSTData {
 			urlConnection = (HttpURLConnection) endpoint.openConnection();
 		} catch (IOException e) {
 			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.streamhub_android_sdk.POSTData.sendPost: " + e.getStackTrace());
+		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.core.core.POSTData.sendPost: " + e.getStackTrace());
 		    throw e;
 		}
 		urlConnection.setDoOutput(true);
@@ -37,7 +37,7 @@ public class POSTData {
 		    out = urlConnection.getOutputStream();
 		} catch (IOException e) {
 			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.streamhub_android_sdk.POSTData.sendPost: " + e.getStackTrace());
+		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.core.core.POSTData.sendPost: " + e.getStackTrace());
 		    throw e;
 		}
 		try {
@@ -45,7 +45,7 @@ public class POSTData {
 			statuscode = urlConnection.getResponseCode();
 		} catch (IOException e) {
 			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.streamhub_android_sdk.POSTData.sendPost: " + e.getStackTrace());
+		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.core.core.POSTData.sendPost: " + e.getStackTrace());
 		    throw e;
 		}  finally {
 		    urlConnection.disconnect();

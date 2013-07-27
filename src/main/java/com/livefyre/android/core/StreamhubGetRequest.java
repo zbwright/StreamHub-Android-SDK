@@ -1,12 +1,11 @@
-package com.livefyre.streamhub_android_sdk;
+package com.livefyre.android.core;
 import java.io.IOException;
 import java.net.URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.os.Handler.Callback;
+
 import android.os.AsyncTask;
-import android.os.Message;
 
 /**
  * 

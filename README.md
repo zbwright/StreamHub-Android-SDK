@@ -5,11 +5,36 @@ Make Android apps powered by Livefyre StreamHub
 
 Read the docs: http://livefyre.github.com/StreamHub-Android-SDK/
 
-# Using
+# Getting Started
 
-Clone the repo and drop the StreamHub-Android-SDK.jar file into your project's libs folder
+The Gradle build needs to be configured with the location of the Android SDK.
+Create a file called `local.properties` and point to your install as follows:
 
-Or, close the repo and add the streamhub_android_sdk as an Android dependency
+    sdk.dir = /your_android_sdk_path
+
+Depending on your development environment, build the library as follows:
+
+## Gradle/Android Studio
+
+Run `gradle install` and add the following to your build.gradle:
+
+    dependencies {
+        compile 'com.livefyre:StreamHub-Android-SDK:0.0.1'
+    }
+
+## Other environments
+
+Run `gradle build` and include the built .aar file in `build/libs/`
+
+# Running the examples
+
+Each example has its own Gradle build and depends on the core library being installed. Run `gradle install` to intsall the library in the local Maven repo if you haven't done so already.
+
+To build an example project, run `gradle build` in that project's directory (e.g. examples/commentstream).
+
+The project can be run through Android Studio or from the command-line as follows (using the commentstream example):
+
+    /<PATH TO SDK INSTALL>/sdk/platform-tools/adb install build/apk/commentstream-debug-unaligned.apk
 
 # Clients
 

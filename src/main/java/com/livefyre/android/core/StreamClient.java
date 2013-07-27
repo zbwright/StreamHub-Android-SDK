@@ -1,4 +1,4 @@
-package com.livefyre.streamhub_android_sdk;
+package com.livefyre.android.core;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -8,7 +8,6 @@ import org.json.JSONException;
 
 import android.net.Uri;
 import android.net.Uri.Builder;
-import android.os.Handler.Callback;
 
 public class StreamClient {
 	public static Builder generateStreamEndpointBuilder(String collectionId, String networkDomain) throws MalformedURLException {

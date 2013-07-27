@@ -1,4 +1,4 @@
-package com.livefyre.streamhub_android_sdk;
+package com.livefyre.android.core;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -19,7 +19,7 @@ public class AdminClient {
 	 * @param articleId The Id of the collection's article.
 	 * @param siteId The Id of the article's site.
 	 * @param networkDomain The collection's network as identified by domain, i.e. livefyre.com.
-	 * @param callback Implement "handleMessage" for this callback.
+	 * @param handler Implement "handleMessage" for this callback.
 	 * @throws UnsupportedEncodingException
 	 * @throws MalformedURLException
 	 */

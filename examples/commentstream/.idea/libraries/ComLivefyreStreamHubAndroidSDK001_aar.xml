@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="ComLivefyreStreamHubAndroidSDK001.aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/exploded-bundles/ComLivefyreStreamHubAndroidSDK001.aar/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../StreamHub-Android-SDK/build/libs/StreamHub-Android-SDK-0.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../build/libs/StreamHub-Android-SDK-0.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

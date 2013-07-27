@@ -1,13 +1,12 @@
 /**
  * 
  */
-package com.livefyre.streamhub_android_sdk;
+package com.livefyre.android.core;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
 import android.net.Uri.Builder;
-import android.os.Handler.Callback;
 import android.text.TextUtils;
 
 /**

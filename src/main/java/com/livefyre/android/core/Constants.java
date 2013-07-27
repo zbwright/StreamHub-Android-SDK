@@ -1,4 +1,4 @@
-package com.livefyre.streamhub_android_sdk;
+package com.livefyre.android.core;
 
 public class Constants {
 	public static String scheme = "http://";

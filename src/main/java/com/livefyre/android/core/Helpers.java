@@ -1,4 +1,4 @@
-package com.livefyre.streamhub_android_sdk;
+package com.livefyre.android.core;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -15,7 +15,7 @@ public class Helpers {
 			byteTransform = instring.getBytes("UTF-8");			
 		} catch (UnsupportedEncodingException e) {
 			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught UnsupportedEncodingException in com.livefyre.streamhub_android_sdk.Helpers.base64String: " + e.getStackTrace());
+		    if (DEBUG) System.err.println("Caught UnsupportedEncodingException in com.livefyre.core.core.Helpers.base64String: " + e.getStackTrace());
 		    throw e; 
 		} finally {
 			string64 = Base64.encodeToString(byteTransform, Base64.NO_WRAP);
@@ -30,7 +30,7 @@ public class Helpers {
 			url = new URL(instring);
 		} catch (MalformedURLException e) {
 			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught MalformedURLException in com.livefyre.streamhub_android_sdk.Helpers.buildURL: " + e.getStackTrace());
+		    if (DEBUG) System.err.println("Caught MalformedURLException in com.livefyre.core.core.Helpers.buildURL: " + e.getStackTrace());
 		    throw e;
 		}
 		
@@ -43,7 +43,7 @@ public class Helpers {
 			contentBody = bodyBuilder.toString().substring(1).getBytes("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught UnsupportedEncodingException in com.livefyre.streamhub_android_sdk.Helpers.buildBody: " + e.getStackTrace());
+		    if (DEBUG) System.err.println("Caught UnsupportedEncodingException in com.livefyre.core.core.Helpers.buildBody: " + e.getStackTrace());
 		    throw e; 
 		}
 		

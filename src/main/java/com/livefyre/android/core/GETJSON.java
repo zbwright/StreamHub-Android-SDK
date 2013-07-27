@@ -1,4 +1,4 @@
-package com.livefyre.streamhub_android_sdk;
+package com.livefyre.android.core;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -31,7 +31,7 @@ public class GETJSON {
 			urlConnection = (HttpURLConnection) endpoint.openConnection();
 		} catch (IOException e) {
 			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.streamhub_android_sdk.GETJSON.fetchData: " + e.getStackTrace());
+		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.core.core.GETJSON.fetchData: " + e.getStackTrace());
 		    throw e;
 		}
 		try {
@@ -47,7 +47,7 @@ public class GETJSON {
 			data = parseJSONData(jsonBuilder.toString());
 		} catch (IOException e) {
 			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.streamhub_android_sdk.GETJSON.fetchData: " + e.getStackTrace());
+		    if (DEBUG) System.err.println("Caught IOException in com.livefyre.core.core.GETJSON.fetchData: " + e.getStackTrace());
 		    throw e;
 		} finally {
 			urlConnection.disconnect();
@@ -66,7 +66,7 @@ public class GETJSON {
 			return new JSONObject(json);
 		} catch (JSONException e) {
 			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught JSONException in com.livefyre.streamhub_android_sdk.GETJSON.fetchData: " + e.getStackTrace());
+		    if (DEBUG) System.err.println("Caught JSONException in com.livefyre.core.core.GETJSON.fetchData: " + e.getStackTrace());
 		    throw e;
 		}
 	}

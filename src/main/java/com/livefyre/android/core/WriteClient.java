@@ -1,4 +1,4 @@
-package com.livefyre.streamhub_android_sdk;
+package com.livefyre.android.core;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.net.Uri.Builder;
 import android.os.Handler;
 import android.os.Handler.Callback;
-
-import com.livefyre.streamhub_android_sdk.POSTDataInBackground;
 
 public class WriteClient {
 	public static void likeContentInBackground

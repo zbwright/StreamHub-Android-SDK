@@ -1,4 +1,4 @@
-package com.livefyre.streamhub_android_sdk.test;
+package com.livefyre.android.core.test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.res.Resources;
 import android.test.InstrumentationTestCase;
-import com.livefyre.streamhub_android_sdk.*;
+import com.livefyre.android.core.*;
 
 public class ClientTest extends InstrumentationTestCase {
 	private String articleId = "mockArticleId";

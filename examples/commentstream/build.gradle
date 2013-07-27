@@ -1,0 +1,29 @@
+apply plugin: 'android'
+apply plugin: 'maven'
+
+repositories {
+    mavenLocal()
+}
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "17.0"
+
+    defaultConfig {
+        minSdkVersion 8
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.5.4'
+    }
+}
+
+dependencies {
+    compile 'com.livefyre:StreamHub-Android-SDK:0.0.1'
+}

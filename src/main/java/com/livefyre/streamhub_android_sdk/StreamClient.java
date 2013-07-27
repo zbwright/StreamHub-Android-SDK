@@ -35,9 +35,9 @@ public class StreamClient {
 		GETJSON.fetchData(streamEndpoint);
 	}
 	
-	public static void pollStreamEndpointInBackground(Builder endpointBuilder, String eventId, Callback callback) throws MalformedURLException {
+	public static void pollStreamEndpointInBackground(Builder endpointBuilder, String eventId, StreamhubResponseHandler handler) throws MalformedURLException {
 		URL streamEndpoint = generateStreamEndpoint(endpointBuilder, eventId);
 		
-		new GETJSONinBackground().execute(streamEndpoint, callback);
+		new StreamhubGetRequest(handler).execute(streamEndpoint);
 	}
 }

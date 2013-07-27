@@ -26,3 +26,6 @@ local.properties
 
 # OS Noise
 .DS_Store
+
+.gradle
+build

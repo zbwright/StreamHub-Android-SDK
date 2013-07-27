@@ -10,8 +10,6 @@ import android.net.Uri.Builder;
 import android.os.Handler.Callback;
 import android.text.TextUtils;
 
-import com.livefyre.streamhub_android_sdk.GETJSONinBackground;
-
 /**
  * @author zjj
  *
@@ -25,14 +23,14 @@ public class PublicAPIClient {
 	 * @param siteId Site ID to filter on. Optional.
 	 * @param networkDomain The network to query against as identified by domain, i.e. livefyre.com.
 	 * @param requestResults Number of results to be returned. The default is 10 and the maximum is 100. Optional.
-	 * @param callback Implement "handleMessage" for this callback.
+	 * @param handler Implement "handleMessage" for this callback.
 	 * @throws MalformedURLException
 	 */
 	public static void getHottestCollectionsInBackground
-	(String tag, String siteId, String networkDomain, Integer requestResults, Callback callback) throws MalformedURLException {
+	(String tag, String siteId, String networkDomain, Integer requestResults, StreamhubResponseHandler handler) throws MalformedURLException {
 		URL hottestCollectionsEndpoint = generateHottestCollectionsEndpoint(tag, siteId, networkDomain, requestResults);
 		
-		new GETJSONinBackground().execute(hottestCollectionsEndpoint, callback);
+		new StreamhubGetRequest(handler).execute(hottestCollectionsEndpoint);
 	}
 	
 	/**
@@ -78,14 +76,14 @@ public class PublicAPIClient {
 	 * @param networkDomain The network to query against as identified by domain, i.e. livefyre.com. 
 	 * @param statuses CSV of comment states to return. Optional.
 	 * @param offset Number of results to skip, defaults to 0. 25 items are returned at a time. Optional.
-	 * @param callback
+	 * @param handler
 	 * @throws MalformedURLException
 	 */
 	public static void getUserContentInBackground
-	(String userId, String userToken, String networkDomain, List<String> statuses, Integer offset, Callback callback) throws MalformedURLException {
+	(String userId, String userToken, String networkDomain, List<String> statuses, Integer offset, StreamhubResponseHandler handler) throws MalformedURLException {
 		URL userContentEndpoint = generateUserContentEndpoint(userId, userToken, networkDomain, statuses, offset);
 
-		new GETJSONinBackground().execute(userContentEndpoint, callback);
+		new StreamhubGetRequest(handler).execute(userContentEndpoint);
 	}
 	
 	/**

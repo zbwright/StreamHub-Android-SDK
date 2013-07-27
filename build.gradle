@@ -1,0 +1,55 @@
+apply plugin: 'eclipse'
+apply plugin: 'android-library'
+apply plugin: 'maven'
+
+version = "0.0.1"
+group = "com.livefyre"
+
+
+repositories {
+    mavenLocal()
+}
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "17.0"
+    
+    defaultConfig {
+        minSdkVersion 8
+    }
+    
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.5.4'
+    }
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository url: 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+    }
+  }
+}
+task install(dependsOn: uploadArchives)
+
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.allSource
+}
+
+configurations{
+  sourceArchives
+}
+
+artifacts{
+  sourceArchives sourceJar
+}
+
+install.configuration = configurations.sourceArchives

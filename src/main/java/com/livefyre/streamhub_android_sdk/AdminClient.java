@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import android.net.Uri.Builder;
-import android.os.Handler.Callback;
 
 /** 
  * @author zjj
@@ -25,10 +24,10 @@ public class AdminClient {
 	 * @throws MalformedURLException
 	 */
 	public static void authenticateUserInBackground
-	(String userToken, String collectionId, String articleId, String siteId, String networkDomain, Callback callback) throws UnsupportedEncodingException, MalformedURLException {
+	(String userToken, String collectionId, String articleId, String siteId, String networkDomain, StreamhubResponseHandler handler) throws UnsupportedEncodingException, MalformedURLException {
 		URL authEndpoint = generateAuthEndpoint(userToken, collectionId, articleId, siteId, networkDomain); 
 	
-		new GETJSONinBackground().execute(authEndpoint, callback);
+		new StreamhubGetRequest(handler).execute(authEndpoint);
 	}
 	
 	/**

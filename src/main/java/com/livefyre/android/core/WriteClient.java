@@ -7,6 +7,8 @@ import android.net.Uri.Builder;
 import android.os.Handler;
 import android.os.Handler.Callback;
 
+import com.livefyre.android.core.http.StreamhubPostRequest;
+
 public class WriteClient {
 	public static void likeContentInBackground
 	(String contentId, String userToken, String collectionId, String networkDomain, Handler.Callback callback) throws MalformedURLException, UnsupportedEncodingException {
@@ -41,7 +43,7 @@ public class WriteClient {
 	(URL endpoint, String collectionId, Callback callback) throws MalformedURLException, UnsupportedEncodingException {
 		byte[] contentBody = generateLikeOrUnlikePostData(collectionId);
 		
-		new POSTDataInBackground().execute(endpoint, contentBody, callback); 
+		//new StreamhubPostRequest().execute(endpoint, contentBody, callback);
 	}
 	
 	private static URL generateLikeOrUnlikeEndpoint
@@ -66,8 +68,8 @@ public class WriteClient {
 	(String body, String userToken, String parentId, String collectionId, String networkDomain, Handler.Callback callback) throws MalformedURLException, UnsupportedEncodingException {
 		URL postContentEndpoint = generatePostContentURL(userToken, parentId, collectionId, networkDomain);
 		byte[] contentBody = generatePostContentBody(body);
-		
-		new POSTDataInBackground().execute(postContentEndpoint, contentBody, callback); 
+
+   //     new StreamhubPostRequest(handler).execute(postContentEndpoint, contentBody);
 	}
 	
 	public static URL generatePostContentURL

@@ -1,4 +1,6 @@
 package com.livefyre.android.core;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,10 +22,9 @@ public class BootstrapClient {
 	 * @throws MalformedURLException
 	 */
 	public static void getInitInBackground
-	(String articleId, String siteId, String networkDomain, String environment, StreamhubResponseHandler handler) throws UnsupportedEncodingException, MalformedURLException {
-		URL initEndpoint = generateInitEndpoint(articleId, siteId, networkDomain, environment);
-		
-		new StreamhubGetRequest(handler).execute(initEndpoint);
+	(String articleId, String siteId, String networkDomain, String environment, JsonHttpResponseHandler handler) throws UnsupportedEncodingException, MalformedURLException {
+        URL initEndpoint = generateInitEndpoint(articleId, siteId, networkDomain, environment);
+        HttpClient.client.get(initEndpoint.toString(), handler);
 	}
 	/**
 	 * Generates an init endpoint with the specified parameters.

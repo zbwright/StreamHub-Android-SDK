@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.livefyre.android.core.BootstrapClient;
-import com.livefyre.android.core.StreamhubResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,13 +53,16 @@ public class MainActivity extends Activity {
     }
 
 
-    private class InitCallback implements StreamhubResponseHandler {
-        public void handle(JSONObject data) {
+    private class InitCallback extends JsonHttpResponseHandler {
+        public void onSuccess(JSONObject data) {
             try {
                 JSONArray contentArr = data.getJSONObject("headDocument").getJSONArray("content");
                 for (int idx=0; idx<contentArr.length(); idx++) {
                     JSONObject contentObj = contentArr.getJSONObject(idx);
                     if (contentObj.getInt("type") != 0) {
+                        continue;
+                    }
+                    if (contentObj.getInt("vis") != 1) {
                         continue;
                     }
                     addTextView(contentObj.getJSONObject("content").getString("bodyHtml"));

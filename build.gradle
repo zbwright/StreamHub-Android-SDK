@@ -34,6 +34,10 @@ buildscript {
     }
 }
 
+dependencies {
+    compile files('libs/android-async-http-1.4.2.jar')
+}
+
 uploadArchives {
   repositories {
     mavenDeployer {

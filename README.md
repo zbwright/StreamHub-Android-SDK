@@ -14,7 +14,7 @@ Create a file called `local.properties` and point to your install as follows:
 
 Depending on your development environment, build the library as follows:
 
-## Gradle/Android Studio
+#### Gradle/Android Studio
 
 Run `gradle install` and add the following to your build.gradle:
 
@@ -22,7 +22,7 @@ Run `gradle install` and add the following to your build.gradle:
         compile 'com.livefyre:StreamHub-Android-SDK:0.0.1'
     }
 
-## Other environments
+#### Other environments
 
 Run `gradle build` and include the built .aar file in `build/libs/`
 

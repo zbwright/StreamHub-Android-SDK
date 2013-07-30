@@ -23,30 +23,4 @@ public class Helpers {
 		
 		return string64;
 	}
-	
-	public static URL generateURL(String instring) throws MalformedURLException {
-		URL url = null;
-		try {
-			url = new URL(instring);
-		} catch (MalformedURLException e) {
-			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught MalformedURLException in com.livefyre.core.core.Helpers.buildURL: " + e.getStackTrace());
-		    throw e;
-		}
-		
-		return url;
-	}
-	
-	public static byte[] generatePostBody(Builder bodyBuilder) throws UnsupportedEncodingException {
-		byte[] contentBody = null;
-		try {
-			contentBody = bodyBuilder.toString().substring(1).getBytes("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			boolean DEBUG = BuildConfig.DEBUG;
-		    if (DEBUG) System.err.println("Caught UnsupportedEncodingException in com.livefyre.core.core.Helpers.buildBody: " + e.getStackTrace());
-		    throw e; 
-		}
-		
-		return contentBody;
-	}
 }

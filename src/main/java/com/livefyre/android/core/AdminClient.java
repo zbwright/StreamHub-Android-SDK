@@ -2,8 +2,10 @@ package com.livefyre.android.core;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URL;
+
 import android.net.Uri.Builder;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 /** 
  * @author zjj
@@ -18,16 +20,15 @@ public class AdminClient {
 	 * @param collectionId The Id of the collection to auth against.
 	 * @param articleId The Id of the collection's article.
 	 * @param siteId The Id of the article's site.
-	 * @param networkDomain The collection's network as identified by domain, i.e. livefyre.com.
+	 * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
 	 * @param handler Implement "handleMessage" for this callback.
 	 * @throws UnsupportedEncodingException
 	 * @throws MalformedURLException
 	 */
-	public static void authenticateUserInBackground
-	(String userToken, String collectionId, String articleId, String siteId, String networkDomain, StreamhubResponseHandler handler) throws UnsupportedEncodingException, MalformedURLException {
-		URL authEndpoint = generateAuthEndpoint(userToken, collectionId, articleId, siteId, networkDomain); 
-	
-		new StreamhubGetRequest(handler).execute(authEndpoint);
+	public static void authenticateUser
+	(String userToken, String collectionId, String articleId, String siteId, String networkId, JsonHttpResponseHandler handler) throws UnsupportedEncodingException {
+		String authEndpoint = generateAuthEndpoint(userToken, collectionId, articleId, siteId, networkId);
+        HttpClient.client.get(authEndpoint, handler);
 	}
 	
 	/**
@@ -37,13 +38,13 @@ public class AdminClient {
 	 * @param collectionId The Id of the collection to auth against.
 	 * @param articleId The Id of the collection's article.
 	 * @param siteId The Id of the article's site.
-	 * @param networkDomain The collection's network as identified by domain, i.e. livefyre.com.
+	 * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
 	 * @return The auth endpoint with the specified parameters.
 	 * @throws UnsupportedEncodingException
 	 * @throws MalformedURLException
 	 */
-	public static URL generateAuthEndpoint
-	(String userToken, String collectionId, String articleId, String siteId, String networkDomain) throws UnsupportedEncodingException, MalformedURLException {
+	public static String generateAuthEndpoint
+	(String userToken, String collectionId, String articleId, String siteId, String networkId) throws UnsupportedEncodingException {
 		Builder paramsBuilder = new Builder();
 		if (collectionId != null) {
 			paramsBuilder.appendQueryParameter("collectionId", collectionId);
@@ -56,14 +57,12 @@ public class AdminClient {
 		}
 		
 		// Build the URL
-		StringBuilder urlStringBuilder = new StringBuilder(Constants.scheme)
-		.append(Constants.adminDomain).append(".")
-		.append(networkDomain)
+		StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
+		.append(Config.adminDomain).append(".")
+		.append(Config.getHostname(networkId))
 		.append("/api/v3.0/auth/")
 		.append(paramsBuilder.toString());
-		
-		URL authEndpoint = Helpers.generateURL(urlStringBuilder.toString());
 
-		return authEndpoint;
+        return urlStringBuilder.toString();
 	}
 }

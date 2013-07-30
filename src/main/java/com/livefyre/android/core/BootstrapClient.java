@@ -3,7 +3,6 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
 
 /**
@@ -15,49 +14,40 @@ public class BootstrapClient {
 	 * 
 	 * @param articleId The Id of the collection's article.
 	 * @param siteId The Id of the article's site.
-	 * @param networkDomain The collection's network as identified by domain, i.e. livefyre.com.
-	 * @param environment Where the collection is hosted, i.e. t-402. Used for development/testing purposes, optional
+	 * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
 	 * @param handler
 	 * @throws UnsupportedEncodingException
 	 * @throws MalformedURLException
 	 */
-	public static void getInitInBackground
-	(String articleId, String siteId, String networkDomain, String environment, JsonHttpResponseHandler handler) throws UnsupportedEncodingException, MalformedURLException {
-        URL initEndpoint = generateInitEndpoint(articleId, siteId, networkDomain, environment);
-        HttpClient.client.get(initEndpoint.toString(), handler);
+	public static void getInit
+	(String articleId, String siteId, String networkId, JsonHttpResponseHandler handler) throws UnsupportedEncodingException {
+        String initEndpoint = generateInitEndpoint(articleId, siteId, networkId);
+        HttpClient.client.get(initEndpoint, handler);
 	}
 	/**
 	 * Generates an init endpoint with the specified parameters.
 	 * 
 	 * @param articleId The Id of the collection's article.
 	 * @param siteId The Id of the article's site.
-	 * @param networkDomain The collection's network as identified by domain, i.e. livefyre.com.
-	 * @param environment  Where the collection is hosted, i.e. t-402. Used for development/testing purposes, optional
+	 * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
 	 * @return The init endpoint with the specified parameters.
 	 * @throws UnsupportedEncodingException
 	 * @throws MalformedURLException
 	 */
-	public static URL generateInitEndpoint
-	(String articleId, String siteId, String networkDomain, String environment) throws UnsupportedEncodingException, MalformedURLException {
+	public static String generateInitEndpoint
+	(String articleId, String siteId, String networkId) throws UnsupportedEncodingException {
 		// Casting
 		String article64 = Helpers.generateBase64String(articleId);
 		String urlSafeArticle64 = URLEncoder.encode(article64, "UTF-8");
 		// Build the URL
-		StringBuilder urlStringBuilder = new StringBuilder(Constants.scheme)
-		.append(Constants.bootstrapDomain).append(".");
-		
-		if (environment != null && networkDomain.equals("livefyre.com")) {
-		    urlStringBuilder.append(environment);
-		} else {
-		    urlStringBuilder.append(networkDomain);
-		}
-
-		urlStringBuilder.append("/bs3/");
-		urlStringBuilder.append(networkDomain).append("/")
+		StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
+		.append(Config.bootstrapDomain).append(".")
+        .append(Config.getHostname(networkId))
+		.append("/bs3/")
+		.append(networkId).append("/")
 		.append(siteId).append("/")
 		.append(urlSafeArticle64).append("/")
 		.append("init");
-		
-		 return Helpers.generateURL(urlStringBuilder.toString());
+		return urlStringBuilder.toString();
 	}
 }

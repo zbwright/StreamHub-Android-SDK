@@ -2,41 +2,29 @@ package com.livefyre.android.core;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import org.json.JSONException;
 
 import android.net.Uri;
 import android.net.Uri.Builder;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 public class StreamClient {
-	public static Builder generateStreamEndpointBuilder(String collectionId, String networkDomain) throws MalformedURLException {
+	public static String generateStreamUrl(String networkId, String collectionId, String eventId) throws MalformedURLException {
 		Builder uriBuilder = new Uri.Builder();
-		uriBuilder.appendPath(Constants.scheme)
-		.appendPath(Constants.streamDomain).appendPath(".")
-		.appendPath(networkDomain)
+		uriBuilder.appendPath(Config.scheme)
+		.appendPath(Config.streamDomain).appendPath(".")
+		.appendPath(Config.getHostname(networkId))
 		.appendPath("/v3.0/collection/")
 		.appendPath(collectionId)
-		.appendPath("/");
-		
-		return uriBuilder; 
+		.appendPath("/")
+        .appendPath(eventId);
+		return uriBuilder.toString();
 	}
 	
-	public static URL generateStreamEndpoint(Builder endpointBuilder, String eventId) throws MalformedURLException {
-		endpointBuilder.appendPath(eventId);
-		String endpointString = endpointBuilder.build().toString();
-		return Helpers.generateURL(endpointString);
-	}
-	
-	public static void pollStreamEndpoint(Builder endpointBuilder, String eventId) throws IOException, JSONException {
-		URL streamEndpoint = generateStreamEndpoint(endpointBuilder, eventId);
-		
-		GETJSON.fetchData(streamEndpoint);
-	}
-	
-	public static void pollStreamEndpointInBackground(Builder endpointBuilder, String eventId, StreamhubResponseHandler handler) throws MalformedURLException {
-		URL streamEndpoint = generateStreamEndpoint(endpointBuilder, eventId);
-		
-		new StreamhubGetRequest(handler).execute(streamEndpoint);
+	public static void pollStreamEndpoint(String networkId, String collectionId, String eventId, JsonHttpResponseHandler handler) throws IOException, JSONException {
+		String streamEndpoint = generateStreamUrl(networkId, collectionId, eventId);
+        HttpClient.client.get(streamEndpoint, handler);
 	}
 }

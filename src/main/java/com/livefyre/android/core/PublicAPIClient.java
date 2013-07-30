@@ -3,11 +3,12 @@
  */
 package com.livefyre.android.core;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import android.net.Uri.Builder;
 import android.text.TextUtils;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 /**
  * @author zjj
@@ -20,16 +21,15 @@ public class PublicAPIClient {
 	 * 
 	 * @param tag Tag to filter on. Optional.
 	 * @param siteId Site ID to filter on. Optional.
-	 * @param networkDomain The network to query against as identified by domain, i.e. livefyre.com.
+	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com.
 	 * @param requestResults Number of results to be returned. The default is 10 and the maximum is 100. Optional.
 	 * @param handler Implement "handleMessage" for this callback.
 	 * @throws MalformedURLException
 	 */
 	public static void getHottestCollectionsInBackground
-	(String tag, String siteId, String networkDomain, Integer requestResults, StreamhubResponseHandler handler) throws MalformedURLException {
-		URL hottestCollectionsEndpoint = generateHottestCollectionsEndpoint(tag, siteId, networkDomain, requestResults);
-		
-		new StreamhubGetRequest(handler).execute(hottestCollectionsEndpoint);
+	(String tag, String siteId, String networkId, Integer requestResults, JsonHttpResponseHandler handler) throws MalformedURLException {
+		String hottestCollectionsEndpoint = generateHottestCollectionsEndpoint(tag, siteId, networkId, requestResults);
+		HttpClient.client.get(hottestCollectionsEndpoint, handler);
 	}
 	
 	/**
@@ -37,13 +37,13 @@ public class PublicAPIClient {
 	 *
 	 * @param tag Tag to filter on. Optional.
 	 * @param siteId Site ID to filter on. Optional.
-	 * @param networkDomain The network to query against as identified by domain, i.e. livefyre.com.
+	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com.
 	 * @param requestResults Number of results to be returned. The default is 10 and the maximum is 100. Optional.
 	 * @return Trending Collections endpoint with the specified parameters.
 	 * @throws MalformedURLException
 	 */
-	public static URL generateHottestCollectionsEndpoint
-	(String tag, String siteId, String networkDomain, Integer requestResults) throws MalformedURLException {
+	public static String generateHottestCollectionsEndpoint
+	(String tag, String siteId, String networkId, Integer requestResults) throws MalformedURLException {
 		// Build the Query Params
 		Builder paramsBuilder = new Builder();
 		if (tag != null) {
@@ -57,13 +57,13 @@ public class PublicAPIClient {
 		}
 				
 		// Build the URL
-		StringBuilder urlStringBuilder = new StringBuilder(Constants.scheme)
-		.append(Constants.bootstrapDomain).append(".")
-		.append(networkDomain)
+		StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
+		.append(Config.bootstrapDomain).append(".")
+		.append(Config.getHostname(networkId))
 		.append("/api/v3.0/hottest/")
 		.append(paramsBuilder.toString());
 
-		return Helpers.generateURL(urlStringBuilder.toString());
+        return urlStringBuilder.toString();
 	}
 	
 	/**
@@ -72,31 +72,30 @@ public class PublicAPIClient {
 	 * 
 	 * @param userId The Id of the user whose content is to be fetched. 
 	 * @param userToken The lftoken of the user whose content is to be fetched. This parameter is required by default unless the network specifies otherwise.
-	 * @param networkDomain The network to query against as identified by domain, i.e. livefyre.com. 
+	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com. 
 	 * @param statuses CSV of comment states to return. Optional.
 	 * @param offset Number of results to skip, defaults to 0. 25 items are returned at a time. Optional.
 	 * @param handler
 	 * @throws MalformedURLException
 	 */
 	public static void getUserContentInBackground
-	(String userId, String userToken, String networkDomain, List<String> statuses, Integer offset, StreamhubResponseHandler handler) throws MalformedURLException {
-		URL userContentEndpoint = generateUserContentEndpoint(userId, userToken, networkDomain, statuses, offset);
-
-		new StreamhubGetRequest(handler).execute(userContentEndpoint);
+	(String userId, String userToken, String networkId, List<String> statuses, Integer offset, JsonHttpResponseHandler handler) throws MalformedURLException {
+		String userContentEndpoint = generateUserContentEndpoint(userId, userToken, networkId, statuses, offset);
+		HttpClient.client.get(userContentEndpoint, handler);
 	}
 	
 	/**
 	 * 
 	 * @param userId The Id of the user whose content is to be fetched. 
 	 * @param userToken The lftoken of the user whose content is to be fetched. This parameter is required by default unless the network specifies otherwise. 
-	 * @param networkDomain The network to query against as identified by domain, i.e. livefyre.com.  
+	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com.  
 	 * @param statuses CSV of comment states to return. Optional. 
 	 * @param offset Number of results to skip, defaults to 0. 25 items are returned at a time. Optional.
 	 * @return User Content endpoint with the specified parameters.
 	 * @throws MalformedURLException
 	 */
-	public static URL generateUserContentEndpoint
-	(String userId, String userToken, String networkDomain, List<String> statuses, Integer offset) throws MalformedURLException {
+	public static String generateUserContentEndpoint
+	(String userId, String userToken, String networkId, List<String> statuses, Integer offset) throws MalformedURLException {
 		//Build the query params 
 		Builder paramsBuilder = new Builder();
 		if (userToken != null) {
@@ -110,14 +109,14 @@ public class PublicAPIClient {
 		}
 				
 		//Build the URL
-		StringBuilder urlStringBuilder = new StringBuilder(Constants.scheme)
-		.append(Constants.bootstrapDomain).append(".")
-		.append(networkDomain)
+		StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
+		.append(Config.bootstrapDomain).append(".")
+		.append(Config.getHostname(networkId))
 		.append("/api/v3.0/author/")
 		.append(userId)
 		.append("/comments/")
 		.append(paramsBuilder.toString());
-				
-		return Helpers.generateURL(urlStringBuilder.toString());
+
+        return urlStringBuilder.toString();
 	}
 }

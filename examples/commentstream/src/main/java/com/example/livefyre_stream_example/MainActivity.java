@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.livefyre.android.core.BootstrapClient;
+import com.livefyre.android.core.Config;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONException;
@@ -20,16 +21,15 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Config.environment = "qa-ext.livefyre.com";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         try {
-            BootstrapClient.getInitInBackground("51", "290596", "livefyre.com", "qa-ext.livefyre.com",
+            BootstrapClient.getInit("51", "290596", "livefyre.com",
                     new InitCallback());
 
         } catch (UnsupportedEncodingException e) {
-
-        } catch (MalformedURLException e) {
 
         }
     }
@@ -70,7 +70,9 @@ public class MainActivity extends Activity {
            } catch (JSONException e) {
 
             }
-
+        }
+        public void onFailure(Throwable e, String str) {
+            System.out.print("meow");
         }
     }
 }

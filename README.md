@@ -28,7 +28,7 @@ Run `gradle build` and include the built .aar file in `build/libs/`
 
 # Running the examples
 
-Each example has its own Gradle build and depends on the core library being installed. Run `gradle install` to intsall the library in the local Maven repo if you haven't done so already.
+Each example has its own Gradle build and depends on the core library being installed. Run `gradle install` to install the library in the local Maven repo if you haven't done so already.
 
 To build an example project, run `gradle build` in that project's directory (e.g. examples/commentstream).
 
@@ -46,6 +46,6 @@ The StreamHub Android SDK exposes several Client classes that can be used to req
 
 * [`PublicAPIClient`](http://livefyre.github.com/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/PublicAPIClient.html) - Request the Hottest Collections in a Network or get recent Content from a specific user
 
-# Deving
+* [`StreamClient`](http://livefyre.github.io/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/StreamClient.html) - Poll a Collection to retrieve new, updated, and deleted Content when it becomes available.
 
-Clone the project, run the tests, and notice a few undocumented classes. Kindly treat the project as alpha code.
+* [`WriteClient`](http://livefyre.github.io/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/WriteClient.html) - Post Content, flag Content, like/unlike Content in a Collection. User authentication tokens will generally be required to use methods in this class.

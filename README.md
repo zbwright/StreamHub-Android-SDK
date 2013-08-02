@@ -16,7 +16,7 @@ Depending on your development environment, build the library as follows:
 
 #### Gradle/Android Studio
 
-Run `gradle install` and add the following to your build.gradle:
+Run `./gradlew install` and add the following to your build.gradle:
 
     dependencies {
         compile 'com.livefyre:StreamHub-Android-SDK:0.0.1'

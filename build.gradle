@@ -9,6 +9,10 @@ repositories {
     mavenLocal()
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.6'
+}
+
 android {
     compileSdkVersion 17
     buildToolsVersion "17.0"

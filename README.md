@@ -59,8 +59,6 @@ Responses to actions sent via the WriteClient will be sent directly back. They w
 
 The StreamHub Android SDK exposes several Client classes that can be used to request StreamHub APIs.
 
-* [`AdminClient`](http://livefyre.github.com/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/AdminClient.html) - Exchange a user authentication token for user information, keys, and other metadata
-
 * [`BootstrapClient`](http://livefyre.github.com/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/BootstrapClient.html) - Get recent Content and metadata about a particular Collection
 
 * [`PublicAPIClient`](http://livefyre.github.com/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/PublicAPIClient.html) - Request the Hottest Collections in a Network or get recent Content from a specific user

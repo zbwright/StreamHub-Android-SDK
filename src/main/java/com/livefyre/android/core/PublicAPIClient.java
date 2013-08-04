@@ -17,7 +17,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 public class PublicAPIClient {
 	/**
 	 * Performs a network request on a different thread and delivers a message to the callback. A JSON object with the results will be bound to the message.
-	 * @see https://github.com/Livefyre/livefyre-docs/wiki/Hottest-Collection-API
+	 * @see "https://github.com/Livefyre/livefyre-docs/wiki/Hottest-Collection-API"
 	 * 
 	 * @param tag Tag to filter on. Optional.
 	 * @param siteId Site ID to filter on. Optional.
@@ -26,9 +26,9 @@ public class PublicAPIClient {
 	 * @param handler Implement "handleMessage" for this callback.
 	 * @throws MalformedURLException
 	 */
-	public static void getHottestCollectionsInBackground
-	(String tag, String siteId, String networkId, Integer requestResults, JsonHttpResponseHandler handler) throws MalformedURLException {
-		String hottestCollectionsEndpoint = generateHottestCollectionsEndpoint(tag, siteId, networkId, requestResults);
+	public static void getHottestCollections
+	(String networkId, String siteId, String tag, Integer requestResults, JsonHttpResponseHandler handler) throws MalformedURLException {
+		String hottestCollectionsEndpoint = generateHottestCollectionsEndpoint(networkId, siteId, tag, requestResults);
 		HttpClient.client.get(hottestCollectionsEndpoint, handler);
 	}
 	
@@ -43,7 +43,7 @@ public class PublicAPIClient {
 	 * @throws MalformedURLException
 	 */
 	public static String generateHottestCollectionsEndpoint
-	(String tag, String siteId, String networkId, Integer requestResults) throws MalformedURLException {
+	(String networkId, String siteId, String tag, Integer requestResults) throws MalformedURLException {
 		// Build the Query Params
 		Builder paramsBuilder = new Builder();
 		if (tag != null) {
@@ -68,19 +68,18 @@ public class PublicAPIClient {
 	
 	/**
 	 * Performs a network request on a different thread and delivers a message to the callback. A JSON object with the results will be bound to the message.
-	 * @see https://github.com/Livefyre/livefyre-docs/wiki/User-Content-API
+	 * @see "https://github.com/Livefyre/livefyre-docs/wiki/User-Content-API"
 	 * 
 	 * @param userId The Id of the user whose content is to be fetched. 
 	 * @param userToken The lftoken of the user whose content is to be fetched. This parameter is required by default unless the network specifies otherwise.
 	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com. 
 	 * @param statuses CSV of comment states to return. Optional.
 	 * @param offset Number of results to skip, defaults to 0. 25 items are returned at a time. Optional.
-	 * @param handler
 	 * @throws MalformedURLException
 	 */
-	public static void getUserContentInBackground
-	(String userId, String userToken, String networkId, List<String> statuses, Integer offset, JsonHttpResponseHandler handler) throws MalformedURLException {
-		String userContentEndpoint = generateUserContentEndpoint(userId, userToken, networkId, statuses, offset);
+	public static void getUserContent
+	(String networkId, String userId, String userToken, List<String> statuses, Integer offset, JsonHttpResponseHandler handler) throws MalformedURLException {
+		String userContentEndpoint = generateUserContentEndpoint(networkId, userId, userToken, statuses, offset);
 		HttpClient.client.get(userContentEndpoint, handler);
 	}
 	
@@ -95,7 +94,7 @@ public class PublicAPIClient {
 	 * @throws MalformedURLException
 	 */
 	public static String generateUserContentEndpoint
-	(String userId, String userToken, String networkId, List<String> statuses, Integer offset) throws MalformedURLException {
+	(String networkId, String userId, String userToken, List<String> statuses, Integer offset) throws MalformedURLException {
 		//Build the query params 
 		Builder paramsBuilder = new Builder();
 		if (userToken != null) {

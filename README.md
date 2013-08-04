@@ -30,6 +30,8 @@ Run `gradle build` and include the built .aar file in `build/libs/`
 
 Each example has its own Gradle build and depends on the core library being installed. Run `gradle install` to install the library in the local Maven repo if you haven't done so already.
 
+The examples also have hard-coded values for the article and user token values. Replace the hard-coded values with values appropriate to your application.
+
 To build an example project, run `gradle build` in that project's directory (e.g. examples/commentstream).
 
 The project can be run through Android Studio or from the command-line as follows (using the commentstream example):
@@ -38,9 +40,11 @@ The project can be run through Android Studio or from the command-line as follow
 
 # Building an application
 
+## Environment Configuration
+By default, the library uses the Livefyre production environment. To configure it for the UAT environment, add `Config.environment = "t402.livefyre.com";` to your application instantiation.
+
 ## Authentication
 The first step in building an application will be to authenticate a user. Information (including a sequence diagram) on how to construct an LFToken can be found [`here`](https://github.com/Livefyre/livefyre-docs/wiki/Livefyre-authentication-token).
-Once an LFToken is constructed, the SDK provides the authenticateUser method in the [`AdminClient`](https://github.com/Livefyre/StreamHub-Android-SDK/blob/gradle/src/main/java/com/livefyre/android/core/AdminClient.java) to retreive more information about the user. This is optional.
 
 ## Retrieving Collections and New Data
 The [`BootstrapClient`](https://github.com/Livefyre/StreamHub-Android-SDK/blob/gradle/src/main/java/com/livefyre/android/core/BootstrapClient.java) is used to retrieve initial data for a collection.

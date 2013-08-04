@@ -19,7 +19,6 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Config.environment = "qa-ext.livefyre.com";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -29,8 +28,7 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 EditText editText = (EditText) findViewById(R.id.editText);
 
-                WriteClient.postContent("livefyre.com", "2486543", "",
-                      "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJkb21haW4iOiAibGl2ZWZ5cmUuY29tIiwgImV4cGlyZXMiOiAxMzc3NzUyNjM2LjIxODQ4NSwgInVzZXJfaWQiOiAiX3VwMTc5MjY4MiJ9.ZPTTuQzaKLE6K3q5vTzWUSdamULk19k9OjhsXuBOfMk",
+                WriteClient.postContent("networkId", "collectionId", "parentId (optional)", "token",
                        editText.getText().toString(), new PostCommentCallback());
             }
         });

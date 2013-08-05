@@ -1,0 +1,67 @@
+apply plugin: 'android-library'
+apply plugin: 'maven'
+
+version = "0.0.1"
+group = "com.livefyre"
+
+
+repositories {
+    mavenLocal()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.6'
+}
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "17.0"
+    
+    defaultConfig {
+        minSdkVersion 8
+    }
+}
+
+subprojects {
+    delegate.tasks.each {task ->
+        task.enabled = false;
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.5.4'
+    }
+}
+
+dependencies {
+    compile files('libs/android-async-http-1.4.2.jar')
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+        repository url: 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+    }
+  }
+}
+task install(dependsOn: uploadArchives)
+
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.allSource
+}
+
+configurations{
+  sourceArchives
+}
+
+artifacts{
+  sourceArchives sourceJar
+}
+
+install.configuration = configurations.sourceArchives

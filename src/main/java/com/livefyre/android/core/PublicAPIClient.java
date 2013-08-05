@@ -19,9 +19,9 @@ public class PublicAPIClient {
 	 * Performs a network request on a different thread and delivers a message to the callback. A JSON object with the results will be bound to the message.
 	 * @see "https://github.com/Livefyre/livefyre-docs/wiki/Hottest-Collection-API"
 	 * 
-	 * @param tag Tag to filter on. Optional.
-	 * @param siteId Site ID to filter on. Optional.
 	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com.
+	 * @param siteId Site ID to filter on. Optional.
+	 * @param tag Tag to filter on. Optional.
 	 * @param requestResults Number of results to be returned. The default is 10 and the maximum is 100. Optional.
 	 * @param handler Implement "handleMessage" for this callback.
 	 * @throws MalformedURLException
@@ -35,9 +35,9 @@ public class PublicAPIClient {
 	/**
 	 * Generates a user content endpoint with the specified parameters.
 	 *
-	 * @param tag Tag to filter on. Optional.
-	 * @param siteId Site ID to filter on. Optional.
 	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com.
+	 * @param siteId Site ID to filter on. Optional.
+	 * @param tag Tag to filter on. Optional.
 	 * @param requestResults Number of results to be returned. The default is 10 and the maximum is 100. Optional.
 	 * @return Trending Collections endpoint with the specified parameters.
 	 * @throws MalformedURLException
@@ -70,9 +70,9 @@ public class PublicAPIClient {
 	 * Performs a network request on a different thread and delivers a message to the callback. A JSON object with the results will be bound to the message.
 	 * @see "https://github.com/Livefyre/livefyre-docs/wiki/User-Content-API"
 	 * 
+	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com. 
 	 * @param userId The Id of the user whose content is to be fetched. 
 	 * @param userToken The lftoken of the user whose content is to be fetched. This parameter is required by default unless the network specifies otherwise.
-	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com. 
 	 * @param statuses CSV of comment states to return. Optional.
 	 * @param offset Number of results to skip, defaults to 0. 25 items are returned at a time. Optional.
 	 * @throws MalformedURLException
@@ -85,9 +85,9 @@ public class PublicAPIClient {
 	
 	/**
 	 * 
+	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com.  
 	 * @param userId The Id of the user whose content is to be fetched. 
 	 * @param userToken The lftoken of the user whose content is to be fetched. This parameter is required by default unless the network specifies otherwise. 
-	 * @param networkId The network to query against as identified by domain, i.e. livefyre.com.  
 	 * @param statuses CSV of comment states to return. Optional. 
 	 * @param offset Number of results to skip, defaults to 0. 25 items are returned at a time. Optional.
 	 * @return User Content endpoint with the specified parameters.

@@ -23,6 +23,19 @@ public class StreamClient {
 		return uriBuilder.toString();
 	}
 	
+	/**
+	 * Performs a long poll request to the Livefyre's stream endpoint
+	 *
+	 * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
+	 * @param siteId The Id of the article's site.
+	 * @param articleId The Id of the collection's article.
+	 * @param eventId The last eventId that was returned from either stream or
+	 *        bootstrap. Event time a new eventId is returned, it should be used
+	 *        in the next stream request.
+	 * @param handler Response handler
+	 * @throws UnsupportedEncodingException
+	 * @throws MalformedURLException
+	 */
 	public static void pollStreamEndpoint(String networkId, String collectionId, String eventId, JsonHttpResponseHandler handler) throws IOException, JSONException {
 		String streamEndpoint = generateStreamUrl(networkId, collectionId, eventId);
         HttpClient.client.get(streamEndpoint, handler);

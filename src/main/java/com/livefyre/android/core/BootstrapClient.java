@@ -12,24 +12,24 @@ public class BootstrapClient {
 	/**	 
 	 * Performs a network request on a different thread and delivers a message to the callback. A JSON object with the results will be bound to the message.
 	 * 
-	 * @param articleId The Id of the collection's article.
-	 * @param siteId The Id of the article's site.
 	 * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
-	 * @param handler
+	 * @param siteId The Id of the article's site.
+	 * @param articleId The Id of the collection's article.
+	 * @param handler Response handler
 	 * @throws UnsupportedEncodingException
 	 * @throws MalformedURLException
 	 */
 	public static void getInit
 	(String networkId, String siteId, String articleId, JsonHttpResponseHandler handler) throws UnsupportedEncodingException {
-        String initEndpoint = generateInitEndpoint(networkId, siteId, articleId);
-        HttpClient.client.get(initEndpoint, handler);
+		String initEndpoint = generateInitEndpoint(networkId, siteId, articleId);
+		HttpClient.client.get(initEndpoint, handler);
 	}
 	/**
 	 * Generates an init endpoint with the specified parameters.
 	 * 
-	 * @param articleId The Id of the collection's article.
-	 * @param siteId The Id of the article's site.
 	 * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
+	 * @param siteId The Id of the article's site.
+	 * @param articleId The Id of the collection's article.
 	 * @return The init endpoint with the specified parameters.
 	 * @throws UnsupportedEncodingException
 	 * @throws MalformedURLException

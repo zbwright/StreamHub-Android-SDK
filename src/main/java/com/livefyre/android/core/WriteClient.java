@@ -34,6 +34,20 @@ public class WriteClient {
                 new RequestParams("collection_id", collectionId), handler);
     }
 
+    /**
+     * Post content to a Livefyre collection.
+     *
+     * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
+     * @param collectionId The Id of the collection.
+     * @param parentId The id of the content to which this content is a reply.
+     *        If not necessary (that is, this is a top level post, then set to
+     *        empty string ("").
+     * @param token The token of the logged in user.
+     * @param body A string version of the HTML body
+     * @param handler Response handler
+     * @throws UnsupportedEncodingException
+     * @throws MalformedURLException
+     */
 	public static void postContent
 	(String networkId, String collectionId, String parentId, String token, String body, JsonHttpResponseHandler handler){
         Builder paramsBuilder = new Builder();
@@ -48,8 +62,13 @@ public class WriteClient {
                 .append("/post/")
                 .append(paramsBuilder.toString());
 
-        HttpClient.client.post(urlStringBuilder.toString(),
-                new RequestParams("body", body), handler);
+        RequestParams bodyParams = new RequestParams();
+        bodyParams.put("body", body);
+
+        if (parentId != null && parentId.length() != 0) {
+            bodyParams.put("parent_id", parentId);
+        }
+        HttpClient.client.post(urlStringBuilder.toString(), bodyParams, handler);
     }
 
 }

@@ -6,20 +6,14 @@ import android.test.InstrumentationTestCase;
 import com.livefyre.android.core.AdminClient;
 import com.livefyre.android.core.BootstrapClient;
 import com.livefyre.android.core.PublicAPIClient;
-import com.livefyre.android.core.test.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLStreamHandler;
-import java.net.URLStreamHandlerFactory;
 
 public class ClientTest extends InstrumentationTestCase {
     private String articleId = "mockArticleId";
@@ -37,7 +31,8 @@ public class ClientTest extends InstrumentationTestCase {
     @Override
     public void setUp() {
         if (mockHandler == null) {
-            MockURLStreamHandler handler = new MockURLStreamHandler();
+            Resources res = getInstrumentation().getContext().getResources();
+            MockURLStreamHandler handler = new MockURLStreamHandler(res);
             System.out.println("Setting URL mock factory");
             URL.setURLStreamHandlerFactory(handler);
             mockHandler = handler;
@@ -155,100 +150,4 @@ public class ClientTest extends InstrumentationTestCase {
     }
 
     // TODO WriteClient not tested. StreamClient not tested.
-
-    // This is silly to nest the classes like this, but easiest way to load the resources we want.
-    public class MockURLStreamHandler extends URLStreamHandler implements URLStreamHandlerFactory {
-        public Resources res;
-
-        @Override
-        protected URLConnection openConnection(URL inUrl) throws IOException, NullPointerException {
-            System.out.println("Mocking opening a connection.");
-            return new MockHttpURLConnection(inUrl);
-        }
-
-        @Override
-        public URLStreamHandler createURLStreamHandler(String protocol) {
-            // ???
-            return this;
-        }
-    }
-
-    public class MockHttpURLConnection extends HttpURLConnection {
-        private Integer mockFile;
-
-        protected MockHttpURLConnection(URL inUrl) throws NullPointerException {
-            super(inUrl);
-            System.out.println("Mocking the Url...");
-            String inString = inUrl.toString();
-            System.out.println(inString);
-
-            // AdminClient
-            if (inString.equals("http://admin.mockDomain/api/v3.0/auth/?collectionId=mockCollId&lftoken=mocklftoken")) {
-                System.out.println("Setting mock to auth sample");
-                setMockFile(R.raw.auth_sample);
-            }
-            if (inString.equals("http://admin.mockDomain/api/v3.0/auth/?siteId=mockSiteId&articleId=bW9ja0FydGljbGVJZA%3D%3D&lftoken=mocklftoken")) {
-                System.out.println("Setting mock to auth sample");
-                setMockFile(R.raw.auth_sample);
-            }
-            // BootstrapClient
-            if (inString.equals("http://bootstrap.mockDomain/bs3/mockDomain/mockSiteId/bW9ja0FydGljbGVJZA%3D%3D/init")) {
-                System.out.println("Setting mock to bootstrap sample");
-                setMockFile(R.raw.init_sample);
-            }
-            // Public API Client
-            if (inString.equals("http://bootstrap.mockDomain/api/v3.0/hottest/?tag=mockTag&number=22")) {
-                System.out.println("Setting mock to hotness sample");
-                setMockFile(R.raw.hottest_sample);
-            }
-            if (inString.equals("http://bootstrap.mockDomain/api/v3.0/author/mockUserId/comments/?lftoken=mocklftoken")) {
-                System.out.println("Setting mock to user content sample");
-                setMockFile(R.raw.usercontent_sample);
-            }
-            if (inString.equals("http://bootstrap.mockTag/api/v3.0/hottest/?tag=mockDomain&number=22")) {
-                System.out.println("Setting mock to hottest sample");
-                setMockFile(R.raw.hottest_sample);
-            }
-            if (inString.equals("http://bootstrap.mockUserId/api/v3.0/author/mocklftoken/comments/?lftoken=mockDomain")) {
-                System.out.println("Setting mock to user comments sample");
-                // TODO: check that such endpoint even exists!
-                setMockFile(R.raw.usercontent_sample);
-            }
-            if (this.mockFile == null) {
-                throw new NullPointerException();
-            }
-            // Write Client...
-        }
-
-        @Override
-        public InputStream getInputStream() throws IOException {
-            System.out.println("Loading the mock file...");
-            System.out.println(mockFile.toString());
-            System.out.println("Setting mock resources");
-            Resources res = getInstrumentation().getContext().getResources();
-            System.out.println("Opening mock resources");
-            return res.openRawResource(mockFile);
-        }
-
-        @Override
-        public void connect() throws IOException {
-        }
-
-        @Override
-        public void disconnect() {
-        }
-
-        @Override
-        public boolean usingProxy() {
-            return false;
-        }
-
-        public Integer getMockFile() {
-            return mockFile;
-        }
-
-        public void setMockFile(Integer mockFile) {
-            this.mockFile = mockFile;
-        }
-    }
 }

@@ -161,7 +161,7 @@ public class ClientTest extends InstrumentationTestCase {
         public Resources res;
 
         @Override
-        protected URLConnection openConnection(URL inUrl) throws IOException {
+        protected URLConnection openConnection(URL inUrl) throws IOException, NullPointerException {
             System.out.println("Mocking opening a connection.");
             return new MockHttpURLConnection(inUrl);
         }
@@ -176,7 +176,7 @@ public class ClientTest extends InstrumentationTestCase {
     public class MockHttpURLConnection extends HttpURLConnection {
         private Integer mockFile;
 
-        protected MockHttpURLConnection(URL inUrl) {
+        protected MockHttpURLConnection(URL inUrl) throws NullPointerException {
             super(inUrl);
             System.out.println("Mocking the Url...");
             String inString = inUrl.toString();
@@ -205,9 +205,10 @@ public class ClientTest extends InstrumentationTestCase {
                 System.out.println("Setting mock to user content sample");
                 setMockFile(R.raw.usercontent_sample);
             }
-            // Write Client
-
-            return;
+            if (this.mockFile == null) {
+                throw new NullPointerException();
+            }
+            // Write Client...
         }
 
         @Override

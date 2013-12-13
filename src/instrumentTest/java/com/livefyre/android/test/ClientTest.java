@@ -6,7 +6,7 @@ import android.test.InstrumentationTestCase;
 import com.livefyre.android.core.AdminClient;
 import com.livefyre.android.core.BootstrapClient;
 import com.livefyre.android.core.PublicAPIClient;
-import com.livefyre.android.core.R;
+import com.livefyre.android.core.test.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

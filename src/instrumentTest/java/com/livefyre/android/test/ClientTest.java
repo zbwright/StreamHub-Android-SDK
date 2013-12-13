@@ -205,6 +205,15 @@ public class ClientTest extends InstrumentationTestCase {
                 System.out.println("Setting mock to user content sample");
                 setMockFile(R.raw.usercontent_sample);
             }
+            if (inString.equals("http://bootstrap.mockTag/api/v3.0/hottest/?tag=mockDomain&number=22")) {
+                System.out.println("Setting mock to hottest sample");
+                setMockFile(R.raw.hottest_sample);
+            }
+            if (inString.equals("http://bootstrap.mockUserId/api/v3.0/author/mocklftoken/comments/?lftoken=mockDomain")) {
+                System.out.println("Setting mock to user comments sample");
+                // TODO: check that such endpoint even exists!
+                setMockFile(R.raw.usercontent_sample);
+            }
             if (this.mockFile == null) {
                 throw new NullPointerException();
             }

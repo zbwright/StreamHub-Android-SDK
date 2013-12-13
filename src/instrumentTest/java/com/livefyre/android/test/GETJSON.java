@@ -15,6 +15,14 @@ import java.net.URL;
  * @author zjj
  */
 public class GETJSON {
+    /**
+     * Wrapper around fetchData(URL endpoint)
+     *
+     * @param endpoint a string representing URL.
+     * @return A JSONObject with the result
+     * @throws IOException
+     * @throws JSONException
+     */
     public static JSONObject fetchData(String endpoint) throws IOException, JSONException {
         return fetchData(new URL(endpoint));
     }
@@ -30,12 +38,7 @@ public class GETJSON {
     public static JSONObject fetchData(URL endpoint) throws IOException, JSONException {
         HttpURLConnection urlConnection = null;
         JSONObject data = null;
-        try {
-            urlConnection = (HttpURLConnection) endpoint.openConnection();
-        } catch (IOException e) {
-            System.err.println("Caught IOException in com.livefyre.core.core.GETJSON.fetchData: " + e.getStackTrace());
-            throw e;
-        }
+        urlConnection = (HttpURLConnection) endpoint.openConnection();
         try {
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
@@ -46,29 +49,10 @@ public class GETJSON {
                 jsonBuilder.append(character);
             }
             in.close();
-            data = parseJSONData(jsonBuilder.toString());
-        } catch (IOException e) {
-            System.err.println("Caught IOException in com.livefyre.core.core.GETJSON.fetchData: " + e.getStackTrace());
-            throw e;
+            data = new JSONObject(jsonBuilder.toString());
         } finally {
             urlConnection.disconnect();
         }
         return data;
-    }
-
-    /**
-     * Parses JSON string into JSON objects.
-     *
-     * @param json String representation of a JSON Object.
-     * @return A JSON object.
-     * @throws JSONException
-     */
-    public static JSONObject parseJSONData(String json) throws JSONException {
-        try {
-            return new JSONObject(json);
-        } catch (JSONException e) {
-            System.err.println("Caught JSONException in com.livefyre.core.core.GETJSON.fetchData: " + e.getStackTrace());
-            throw e;
-        }
     }
 }

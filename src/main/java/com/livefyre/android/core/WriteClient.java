@@ -1,23 +1,25 @@
 package com.livefyre.android.core;
-import java.io.IOException;
+
 import android.net.Uri.Builder;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import java.io.IOException;
+
 public class WriteClient {
-	public static void likeContent
-	(String networkId, String collectionId, String contentId, String token, JsonHttpResponseHandler handler) throws IOException {
+    public static void likeContent
+            (String networkId, String collectionId, String contentId, String token, JsonHttpResponseHandler handler) throws IOException {
         makeOpineRequest(networkId, collectionId, contentId, token, "like", handler);
-	}
+    }
 
     public static void unlikeContent
             (String networkId, String collectionId, String contentId, String token, JsonHttpResponseHandler handler) throws IOException {
         makeOpineRequest(networkId, collectionId, contentId, token, "unlike", handler);
     }
-	
+
     private static void makeOpineRequest
-    (String networkId, String collectionId, String contentId, String token, String action, JsonHttpResponseHandler handler) {
+            (String networkId, String collectionId, String contentId, String token, String action, JsonHttpResponseHandler handler) {
         Builder paramsBuilder = new Builder();
         paramsBuilder.appendQueryParameter("lftoken", token);
 
@@ -37,19 +39,19 @@ public class WriteClient {
     /**
      * Post content to a Livefyre collection.
      *
-     * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
+     * @param networkId    The collection's network as identified by domain, i.e. livefyre.com.
      * @param collectionId The Id of the collection.
-     * @param parentId The id of the content to which this content is a reply.
-     *        If not necessary (that is, this is a top level post, then set to
-     *        empty string ("").
-     * @param token The token of the logged in user.
-     * @param body A string version of the HTML body
-     * @param handler Response handler
+     * @param parentId     The id of the content to which this content is a reply.
+     *                     If not necessary (that is, this is a top level post, then set to
+     *                     empty string ("").
+     * @param token        The token of the logged in user.
+     * @param body         A string version of the HTML body
+     * @param handler      Response handler
      * @throws UnsupportedEncodingException
      * @throws MalformedURLException
      */
-	public static void postContent
-	(String networkId, String collectionId, String parentId, String token, String body, JsonHttpResponseHandler handler){
+    public static void postContent
+    (String networkId, String collectionId, String parentId, String token, String body, JsonHttpResponseHandler handler) {
         Builder paramsBuilder = new Builder();
         paramsBuilder.appendQueryParameter("lftoken", token);
 

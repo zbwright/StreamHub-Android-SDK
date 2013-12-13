@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -42,7 +43,7 @@ public class MainActivity extends Activity {
     }
 
     public void addTextView(JSONObject content) throws JSONException {
-        ViewGroup root = (ViewGroup)findViewById(R.id.MainLayout);
+        ViewGroup root = (ViewGroup) findViewById(R.id.MainLayout);
         ViewGroup layout = (ViewGroup) getLayoutInflater().inflate(R.layout.comment_layout, root, false);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -81,7 +82,7 @@ public class MainActivity extends Activity {
                 JSONObject authors = data.getJSONObject("headDocument").getJSONObject("authors");
 
                 JSONArray contentArr = data.getJSONObject("headDocument").getJSONArray("content");
-                for (int idx=0; idx<contentArr.length(); idx++) {
+                for (int idx = 0; idx < contentArr.length(); idx++) {
                     JSONObject stateObj = contentArr.getJSONObject(idx);
                     if (stateObj.getInt("type") != 0) {
                         continue;
@@ -93,9 +94,9 @@ public class MainActivity extends Activity {
                     contentObj.put("author", authors.getJSONObject(contentObj.getString("authorId")));
                     addTextView(contentObj);
                 }
-           } catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
-           }
+            }
         }
     }
 }

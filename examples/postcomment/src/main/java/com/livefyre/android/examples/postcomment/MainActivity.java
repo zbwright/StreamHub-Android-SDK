@@ -1,15 +1,13 @@
 package com.livefyre.android.examples.postcomment;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.livefyre.android.core.Config;
 import com.livefyre.android.core.WriteClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -29,10 +27,11 @@ public class MainActivity extends Activity {
                 EditText editText = (EditText) findViewById(R.id.editText);
 
                 WriteClient.postContent("networkId", "collectionId", "parentId (optional)", "token",
-                       editText.getText().toString(), new PostCommentCallback());
+                        editText.getText().toString(), new PostCommentCallback());
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

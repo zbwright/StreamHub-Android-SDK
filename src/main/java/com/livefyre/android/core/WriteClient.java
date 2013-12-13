@@ -8,18 +8,33 @@ import com.loopj.android.http.RequestParams;
 import java.io.IOException;
 
 public class WriteClient {
-    public static void likeContent
-            (String networkId, String collectionId, String contentId, String token, JsonHttpResponseHandler handler) throws IOException {
+    public static void likeContent(String networkId,
+                                   String collectionId,
+                                   String contentId,
+                                   String token,
+                                   JsonHttpResponseHandler handler)
+            throws IOException
+    {
         makeOpineRequest(networkId, collectionId, contentId, token, "like", handler);
     }
 
-    public static void unlikeContent
-            (String networkId, String collectionId, String contentId, String token, JsonHttpResponseHandler handler) throws IOException {
+    public static void unlikeContent(String networkId,
+                                     String collectionId,
+                                     String contentId,
+                                     String token,
+                                     JsonHttpResponseHandler handler)
+            throws IOException
+    {
         makeOpineRequest(networkId, collectionId, contentId, token, "unlike", handler);
     }
 
-    private static void makeOpineRequest
-            (String networkId, String collectionId, String contentId, String token, String action, JsonHttpResponseHandler handler) {
+    private static void makeOpineRequest(String networkId,
+                                         String collectionId,
+                                         String contentId,
+                                         String token,
+                                         String action,
+                                         JsonHttpResponseHandler handler)
+    {
         Builder paramsBuilder = new Builder();
         paramsBuilder.appendQueryParameter("lftoken", token);
 
@@ -50,8 +65,13 @@ public class WriteClient {
      * @throws UnsupportedEncodingException
      * @throws MalformedURLException
      */
-    public static void postContent
-    (String networkId, String collectionId, String parentId, String token, String body, JsonHttpResponseHandler handler) {
+    public static void postContent(String networkId,
+                                   String collectionId,
+                                   String parentId,
+                                   String token,
+                                   String body,
+                                   JsonHttpResponseHandler handler)
+    {
         Builder paramsBuilder = new Builder();
         paramsBuilder.appendQueryParameter("lftoken", token);
 

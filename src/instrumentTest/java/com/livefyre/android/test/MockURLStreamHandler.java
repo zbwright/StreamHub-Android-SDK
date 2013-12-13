@@ -13,21 +13,26 @@ import java.net.URLStreamHandler;
 import java.net.URLStreamHandlerFactory;
 
 
-public class MockURLStreamHandler extends URLStreamHandler implements URLStreamHandlerFactory {
+public class MockURLStreamHandler extends URLStreamHandler implements URLStreamHandlerFactory
+{
     public Resources res;
 
-    public MockURLStreamHandler(Resources res) {
+    public MockURLStreamHandler(Resources res)
+    {
         this.res = res;
     }
 
     @Override
-    protected URLConnection openConnection(URL inUrl) throws IOException, NullPointerException {
+    protected URLConnection openConnection(URL inUrl)
+            throws IOException, NullPointerException
+    {
         System.out.println("Mocking opening a connection.");
         return new MockHttpURLConnection(inUrl);
     }
 
     @Override
-    public URLStreamHandler createURLStreamHandler(String protocol) {
+    public URLStreamHandler createURLStreamHandler(String protocol)
+    {
         // ???
         return this;
     }
@@ -36,42 +41,51 @@ public class MockURLStreamHandler extends URLStreamHandler implements URLStreamH
     public class MockHttpURLConnection extends HttpURLConnection {
         private Integer mockFile;
 
-        protected MockHttpURLConnection(URL inUrl) throws NullPointerException {
+        protected MockHttpURLConnection(URL inUrl)
+                throws NullPointerException
+        {
             super(inUrl);
             System.out.println("Mocking the Url...");
             String inString = inUrl.toString();
             System.out.println(inString);
 
             // AdminClient
-            if (inString.equals("http://admin.mockDomain/api/v3.0/auth/?collectionId=mockCollId&lftoken=mocklftoken")) {
+            if (inString.equals("http://admin.mockDomain/api/v3.0/auth/?collectionId=mockCollId&lftoken=mocklftoken"))
+            {
                 System.out.println("Setting mock to auth sample");
                 setMockFile(R.raw.auth_sample);
             }
-            if (inString.equals("http://admin.mockDomain/api/v3.0/auth/?siteId=mockSiteId&articleId=bW9ja0FydGljbGVJZA%3D%3D&lftoken=mocklftoken")) {
+            else if (inString.equals("http://admin.mockDomain/api/v3.0/auth/?siteId=mockSiteId&articleId=bW9ja0FydGljbGVJZA%3D%3D&lftoken=mocklftoken"))
+            {
                 System.out.println("Setting mock to auth sample");
                 setMockFile(R.raw.auth_sample);
             }
             // BootstrapClient
-            if (inString.equals("http://bootstrap.mockDomain/bs3/mockDomain/mockSiteId/bW9ja0FydGljbGVJZA%3D%3D/init")) {
+            else if (inString.equals("http://bootstrap.mockDomain/bs3/mockDomain/mockSiteId/bW9ja0FydGljbGVJZA%3D%3D/init"))
+            {
                 System.out.println("Setting mock to bootstrap sample");
                 setMockFile(R.raw.init_sample);
             }
             // Public API Client
-            if (inString.equals("http://bootstrap.mockDomain/api/v3.0/hottest/?tag=mockTag&number=22")) {
+            else if (inString.equals("http://bootstrap.mockDomain/api/v3.0/hottest/?tag=mockTag&number=22"))
+            {
                 System.out.println("Setting mock to hotness sample");
                 setMockFile(R.raw.hottest_sample);
             }
-            if (inString.equals("http://bootstrap.mockDomain/api/v3.0/author/mockUserId/comments/?lftoken=mocklftoken")) {
+            else if (inString.equals("http://bootstrap.mockDomain/api/v3.0/author/mockUserId/comments/?lftoken=mocklftoken"))
+            {
                 System.out.println("Setting mock to user content sample");
                 setMockFile(R.raw.usercontent_sample);
             }
-            if (inString.equals("http://bootstrap.mockTag/api/v3.0/hottest/?tag=mockDomain&number=22")) {
+            else if (inString.equals("http://bootstrap.mockTag/api/v3.0/hottest/?tag=mockDomain&number=22"))
+            {
                 System.out.println("Setting mock to hottest sample");
                 setMockFile(R.raw.hottest_sample);
             }
-            if (inString.equals("http://bootstrap.mockUserId/api/v3.0/author/mocklftoken/comments/?lftoken=mockDomain")) {
+            else if (inString.equals("http://bootstrap.mockUserId/api/v3.0/author/mocklftoken/comments/?lftoken=mockDomain"))
+            {
                 System.out.println("Setting mock to user comments sample");
-                // TODO: check that such endpoint even exists!
+                // TODO: check that this endpoint corresponds to a currently existing one
                 setMockFile(R.raw.usercontent_sample);
             }
             if (this.mockFile == null) {
@@ -81,7 +95,9 @@ public class MockURLStreamHandler extends URLStreamHandler implements URLStreamH
         }
 
         @Override
-        public InputStream getInputStream() throws IOException {
+        public InputStream getInputStream()
+                throws IOException
+        {
             System.out.println("Loading the mock file...");
             System.out.println(mockFile.toString());
             System.out.println("Setting mock resources");

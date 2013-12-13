@@ -26,9 +26,16 @@ public class AdminClient {
      * @throws UnsupportedEncodingException
      * @throws MalformedURLException
      */
-    public static void authenticateUser
-    (String userToken, String collectionId, String articleId, String siteId, String networkId, JsonHttpResponseHandler handler) throws UnsupportedEncodingException {
-        String authEndpoint = generateAuthEndpoint(userToken, collectionId, articleId, siteId, networkId);
+    public static void authenticateUser(String userToken,
+                                        String collectionId,
+                                        String articleId,
+                                        String siteId,
+                                        String networkId,
+                                        JsonHttpResponseHandler handler)
+            throws UnsupportedEncodingException
+    {
+        String authEndpoint =
+                generateAuthEndpoint(userToken, collectionId, articleId, siteId, networkId);
         HttpClient.client.get(authEndpoint, handler);
     }
 
@@ -49,7 +56,8 @@ public class AdminClient {
                                               String articleId,
                                               String siteId,
                                               String networkId)
-            throws UnsupportedEncodingException {
+            throws UnsupportedEncodingException
+    {
         Builder paramsBuilder = new Builder();
         if (collectionId != null) {
             paramsBuilder.appendQueryParameter("collectionId", collectionId);

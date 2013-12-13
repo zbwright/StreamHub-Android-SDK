@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class StreamClient {
-    public static String generateStreamUrl(String networkId, String collectionId, String eventId) throws MalformedURLException {
+    public static String generateStreamUrl(String networkId, String collectionId, String eventId)
+            throws MalformedURLException
+    {
         Builder uriBuilder = new Uri.Builder();
         uriBuilder.appendPath(Config.scheme)
                 .appendPath(Config.streamDomain).appendPath(".")
@@ -27,8 +29,7 @@ public class StreamClient {
      * Performs a long poll request to the Livefyre's stream endpoint
      *
      * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
-     * @param siteId    The Id of the article's site.
-     * @param articleId The Id of the collection's article.
+     * @param collectionId    The Id of the collection
      * @param eventId   The last eventId that was returned from either stream or
      *                  bootstrap. Event time a new eventId is returned, it should be used
      *                  in the next stream request.
@@ -36,7 +37,12 @@ public class StreamClient {
      * @throws UnsupportedEncodingException
      * @throws MalformedURLException
      */
-    public static void pollStreamEndpoint(String networkId, String collectionId, String eventId, AsyncHttpResponseHandler handler) throws IOException, JSONException {
+    public static void pollStreamEndpoint(String networkId,
+                                          String collectionId,
+                                          String eventId,
+                                          AsyncHttpResponseHandler handler)
+            throws IOException, JSONException
+    {
         String streamEndpoint = generateStreamUrl(networkId, collectionId, eventId);
         HttpClient.client.get(streamEndpoint, handler);
     }

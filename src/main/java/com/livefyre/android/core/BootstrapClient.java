@@ -23,9 +23,12 @@ public class BootstrapClient {
      * @throws UnsupportedEncodingException
      * @throws MalformedURLException
      */
-    public static void getInit
-    (String networkId, String siteId, String articleId, AsyncHttpResponseHandler handler)
-            throws UnsupportedEncodingException {
+    public static void getInit(String networkId,
+                               String siteId,
+                               String articleId,
+                               AsyncHttpResponseHandler handler)
+            throws UnsupportedEncodingException
+    {
         String initEndpoint = generateInitEndpoint(networkId, siteId, articleId);
         HttpClient.client.get(initEndpoint, handler);
     }
@@ -43,7 +46,8 @@ public class BootstrapClient {
     public static String generateInitEndpoint(String networkId,
                                               String siteId,
                                               String articleId)
-            throws UnsupportedEncodingException {
+            throws UnsupportedEncodingException
+    {
         // Casting
         String article64 = Helpers.generateBase64String(articleId);
         String urlSafeArticle64 = URLEncoder.encode(article64, "UTF-8");

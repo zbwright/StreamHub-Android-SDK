@@ -47,7 +47,8 @@ public class ClientTest extends InstrumentationTestCase {
     public void testBootstrapGetInit() {
         String initEndpoint = null;
         try {
-            initEndpoint = BootstrapClient.generateInitEndpoint(networkDomain, siteId, articleId);
+            initEndpoint = BootstrapClient.generateInitEndpoint(
+                    networkDomain, siteId, articleId);
         } catch (UnsupportedEncodingException e) {
             fail("UnsupportedEncodingException");
         }
@@ -70,7 +71,8 @@ public class ClientTest extends InstrumentationTestCase {
         String authEndpoint = null;
 
         try {
-            authEndpoint = AdminClient.generateAuthEndpoint(userToken, collectionId, articleId, siteId, networkDomain);
+            authEndpoint = AdminClient.generateAuthEndpoint(
+                    userToken, collectionId, articleId, siteId, networkDomain);
         } catch (UnsupportedEncodingException e) {
             fail("UnsupportedEncodingException");
         }
@@ -92,7 +94,8 @@ public class ClientTest extends InstrumentationTestCase {
     public void testAdminClientWithoutCollId() {
         String authEndpoint = null;
         try {
-            authEndpoint = AdminClient.generateAuthEndpoint(userToken, null, articleId, siteId, networkDomain);
+            authEndpoint = AdminClient.generateAuthEndpoint(
+                    userToken, null, articleId, siteId, networkDomain);
         } catch (UnsupportedEncodingException e) {
             fail("UnsupportedEncodingException");
         }
@@ -114,7 +117,8 @@ public class ClientTest extends InstrumentationTestCase {
     public void testPublicAPIClientUserContent() {
         String userContentEndpoint = null;
         try {
-            userContentEndpoint = PublicAPIClient.generateUserContentEndpoint("mockUserId", userToken, networkDomain, null, null);
+            userContentEndpoint = PublicAPIClient.generateUserContentEndpoint(
+                    "mockUserId", userToken, networkDomain, null, null);
         } catch (MalformedURLException e) {
             fail("MalformedURLException");
         }
@@ -133,7 +137,8 @@ public class ClientTest extends InstrumentationTestCase {
     public void testPublicAPIClientHotness() {
         String hotnessEndpoint = null;
         try {
-            hotnessEndpoint = PublicAPIClient.generateHottestCollectionsEndpoint("mockTag", null, networkDomain, 22);
+            hotnessEndpoint = PublicAPIClient.generateHottestCollectionsEndpoint(
+                    "mockTag", null, networkDomain, 22);
         } catch (MalformedURLException e) {
             fail("MalformedURLException");
         }

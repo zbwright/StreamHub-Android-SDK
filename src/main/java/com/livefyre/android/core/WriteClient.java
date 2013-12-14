@@ -1,5 +1,6 @@
 package com.livefyre.android.core;
 
+import android.net.Uri;
 import android.net.Uri.Builder;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -35,19 +36,18 @@ public class WriteClient {
                                          String action,
                                          JsonHttpResponseHandler handler)
     {
-        Builder paramsBuilder = new Builder();
-        paramsBuilder.appendQueryParameter("lftoken", token);
-
         // Build the URL
-        StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
-                .append(Config.quillDomain).append(".")
-                .append(Config.getHostname(networkId))
-                .append("/api/v3.0/message/")
-                .append(contentId).append("/")
-                .append(action)
-                .append(paramsBuilder.toString());
+        final Builder uriBuilder = new Uri.Builder()
+                .scheme(Config.scheme)
+                .authority(Config.quillDomain + "." + Config.getHostname(networkId))
+                .appendPath("api")
+                .appendPath("v3.0")
+                .appendPath("message")
+                .appendPath(contentId)
+                .appendPath(action)
+                .appendQueryParameter("lftoken", token);
 
-        HttpClient.client.post(urlStringBuilder.toString(),
+        HttpClient.client.post(uriBuilder.toString(),
                 new RequestParams("collection_id", collectionId), handler);
     }
 
@@ -72,25 +72,25 @@ public class WriteClient {
                                    String body,
                                    JsonHttpResponseHandler handler)
     {
-        Builder paramsBuilder = new Builder();
-        paramsBuilder.appendQueryParameter("lftoken", token);
 
         // Build the URL
-        StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
-                .append(Config.quillDomain).append(".")
-                .append(Config.getHostname(networkId))
-                .append("/api/v3.0/collection/")
-                .append(collectionId)
-                .append("/post/")
-                .append(paramsBuilder.toString());
+        final Builder uriBuilder = new Uri.Builder()
+                .scheme(Config.scheme)
+                .authority(Config.quillDomain + "." + Config.getHostname(networkId))
+                .appendPath("api")
+                .appendPath("v3.0")
+                .appendPath("collection")
+                .appendPath(collectionId)
+                .appendPath("post")
+                .appendPath("")
+                .appendQueryParameter("lftoken", token);
 
+        // add body parameters
         RequestParams bodyParams = new RequestParams();
         bodyParams.put("body", body);
-
         if (parentId != null && parentId.length() != 0) {
             bodyParams.put("parent_id", parentId);
         }
-        HttpClient.client.post(urlStringBuilder.toString(), bodyParams, handler);
+        HttpClient.client.post(uriBuilder.toString(), bodyParams, handler);
     }
-
 }

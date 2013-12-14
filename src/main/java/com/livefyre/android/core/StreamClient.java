@@ -14,14 +14,15 @@ public class StreamClient {
     public static String generateStreamUrl(String networkId, String collectionId, String eventId)
             throws MalformedURLException
     {
-        Builder uriBuilder = new Uri.Builder();
-        uriBuilder.appendPath(Config.scheme)
-                .appendPath(Config.streamDomain).appendPath(".")
-                .appendPath(Config.getHostname(networkId))
-                .appendPath("/v3.0/collection/")
+        final Builder uriBuilder = new Uri.Builder()
+                .appendPath(Config.scheme)
+                .appendPath(Config.streamDomain + "." + Config.getHostname(networkId))
+                .appendPath("v3.0")
+                .appendPath("collection")
                 .appendPath(collectionId)
-                .appendPath("/")
+                .appendPath("")
                 .appendPath(eventId);
+
         return uriBuilder.toString();
     }
 
@@ -43,7 +44,7 @@ public class StreamClient {
                                           AsyncHttpResponseHandler handler)
             throws IOException, JSONException
     {
-        String streamEndpoint = generateStreamUrl(networkId, collectionId, eventId);
+        final String streamEndpoint = generateStreamUrl(networkId, collectionId, eventId);
         HttpClient.client.get(streamEndpoint, handler);
     }
 }

@@ -1,5 +1,6 @@
 package com.livefyre.android.core;
 
+import android.net.Uri;
 import android.net.Uri.Builder;
 import android.text.TextUtils;
 
@@ -32,7 +33,7 @@ public class PublicAPIClient {
                                              JsonHttpResponseHandler handler)
             throws MalformedURLException
     {
-        String hottestCollectionsEndpoint =
+        final String hottestCollectionsEndpoint =
                 generateHottestCollectionsEndpoint(networkId, siteId, tag, requestResults);
         HttpClient.client.get(hottestCollectionsEndpoint, handler);
     }
@@ -54,26 +55,27 @@ public class PublicAPIClient {
                                                             Integer requestResults)
             throws MalformedURLException
     {
-        // Build the Query Params
-        Builder paramsBuilder = new Builder();
+        // Build the URL
+        final Builder uriBuilder = new Uri.Builder()
+                .scheme(Config.scheme)
+                .authority(Config.bootstrapDomain + "." + Config.getHostname(networkId))
+                .appendPath("api")
+                .appendPath("v3.0")
+                .appendPath("hottest")
+                .appendPath("");
+
+        // Append query parameters
         if (tag != null) {
-            paramsBuilder.appendQueryParameter("tag", tag);
+            uriBuilder.appendQueryParameter("tag", tag);
         }
         if (siteId != null) {
-            paramsBuilder.appendQueryParameter("site", siteId);
+            uriBuilder.appendQueryParameter("site", siteId);
         }
         if (requestResults != null) {
-            paramsBuilder.appendQueryParameter("number", Integer.toString(requestResults));
+            uriBuilder.appendQueryParameter("number", Integer.toString(requestResults));
         }
 
-        // Build the URL
-        StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
-                .append(Config.bootstrapDomain).append(".")
-                .append(Config.getHostname(networkId))
-                .append("/api/v3.0/hottest/")
-                .append(paramsBuilder.toString());
-
-        return urlStringBuilder.toString();
+        return uriBuilder.toString();
     }
 
     /**
@@ -121,27 +123,29 @@ public class PublicAPIClient {
                                                      Integer offset)
             throws MalformedURLException
     {
-        //Build the query params
-        Builder paramsBuilder = new Builder();
+        // Build the URL
+        final Builder uriBuilder = new Uri.Builder()
+                .scheme(Config.scheme)
+                .authority(Config.bootstrapDomain + "." + Config.getHostname(networkId))
+                .appendPath("api")
+                .appendPath("v3.0")
+                .appendPath("author")
+                .appendPath(userId)
+                .appendPath("")
+                .appendPath("comments")
+                .appendPath("");
+
+        // Append query parameters
         if (userToken != null) {
-            paramsBuilder.appendQueryParameter("lftoken", userToken);
+            uriBuilder.appendQueryParameter("lftoken", userToken);
         }
         if (statuses != null) {
-            paramsBuilder.appendQueryParameter("status", TextUtils.join(",", statuses));
+            uriBuilder.appendQueryParameter("status", TextUtils.join(",", statuses));
         }
         if (offset != null) {
-            paramsBuilder.appendQueryParameter("offset", Integer.toString(offset));
+            uriBuilder.appendQueryParameter("offset", Integer.toString(offset));
         }
 
-        //Build the URL
-        StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
-                .append(Config.bootstrapDomain).append(".")
-                .append(Config.getHostname(networkId))
-                .append("/api/v3.0/author/")
-                .append(userId)
-                .append("/comments/")
-                .append(paramsBuilder.toString());
-
-        return urlStringBuilder.toString();
+        return uriBuilder.toString();
     }
 }

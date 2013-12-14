@@ -1,5 +1,6 @@
 package com.livefyre.android.core;
 
+import android.net.Uri;
 import android.net.Uri.Builder;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -34,7 +35,7 @@ public class AdminClient {
                                         JsonHttpResponseHandler handler)
             throws UnsupportedEncodingException
     {
-        String authEndpoint =
+        final String authEndpoint =
                 generateAuthEndpoint(userToken, collectionId, articleId, siteId, networkId);
         HttpClient.client.get(authEndpoint, handler);
     }
@@ -58,24 +59,25 @@ public class AdminClient {
                                               String networkId)
             throws UnsupportedEncodingException
     {
-        Builder paramsBuilder = new Builder();
+        Builder uriBuilder = new Uri.Builder()
+                .scheme(Config.scheme)
+                .authority(Config.adminDomain + "." + Config.getHostname(networkId))
+                .appendPath("api")
+                .appendPath("v3.0")
+                .appendPath("auth")
+                .appendPath("");
+
         if (collectionId != null) {
-            paramsBuilder.appendQueryParameter("collectionId", collectionId);
-            paramsBuilder.appendQueryParameter("lftoken", userToken);
+            uriBuilder
+                    .appendQueryParameter("collectionId", collectionId)
+                    .appendQueryParameter("lftoken", userToken);
         } else {
-            String article64 = Helpers.generateBase64String(articleId);
-            paramsBuilder.appendQueryParameter("siteId", siteId);
-            paramsBuilder.appendQueryParameter("articleId", article64);
-            paramsBuilder.appendQueryParameter("lftoken", userToken);
+            final String article64 = Helpers.generateBase64String(articleId);
+            uriBuilder
+                    .appendQueryParameter("siteId", siteId)
+                    .appendQueryParameter("articleId", article64)
+                    .appendQueryParameter("lftoken", userToken);
         }
-
-        // Build the URL
-        StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
-                .append(Config.adminDomain).append(".")
-                .append(Config.getHostname(networkId))
-                .append("/api/v3.0/auth/")
-                .append(paramsBuilder.toString());
-
-        return urlStringBuilder.toString();
+        return uriBuilder.toString();
     }
 }

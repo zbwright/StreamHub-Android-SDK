@@ -1,12 +1,12 @@
 package com.livefyre.android.core;
 
-//import com.loopj.android.http.JsonHttpResponseHandler;
+import android.net.Uri;
+import android.net.Uri.Builder;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URLEncoder;
 
 /**
  * @author zjj
@@ -29,7 +29,7 @@ public class BootstrapClient {
                                AsyncHttpResponseHandler handler)
             throws UnsupportedEncodingException
     {
-        String initEndpoint = generateInitEndpoint(networkId, siteId, articleId);
+        final String initEndpoint = generateInitEndpoint(networkId, siteId, articleId);
         HttpClient.client.get(initEndpoint, handler);
     }
 
@@ -49,17 +49,18 @@ public class BootstrapClient {
             throws UnsupportedEncodingException
     {
         // Casting
-        String article64 = Helpers.generateBase64String(articleId);
-        String urlSafeArticle64 = URLEncoder.encode(article64, "UTF-8");
+        final String article64 = Helpers.generateBase64String(articleId);
+
         // Build the URL
-        StringBuilder urlStringBuilder = new StringBuilder(Config.scheme)
-                .append(Config.bootstrapDomain).append(".")
-                .append(Config.getHostname(networkId))
-                .append("/bs3/")
-                .append(networkId).append("/")
-                .append(siteId).append("/")
-                .append(urlSafeArticle64).append("/")
-                .append("init");
-        return urlStringBuilder.toString();
+        final Builder uriBuilder = new Uri.Builder()
+                .scheme(Config.scheme)
+                .authority(Config.bootstrapDomain + "." + Config.getHostname(networkId))
+                .appendPath("bs3")
+                .appendPath(networkId)
+                .appendPath(siteId)
+                .appendPath(article64)
+                .appendPath("init");
+
+        return uriBuilder.toString();
     }
 }

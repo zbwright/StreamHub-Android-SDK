@@ -66,6 +66,7 @@ public class MockURLStreamHandler extends URLStreamHandler implements URLStreamH
                 System.out.println("Setting mock to bootstrap sample");
                 setMockFile(R.raw.init_sample);
             }
+            /*
             // Public API Client
             else if (inString.equals("http://bootstrap.mockDomain/api/v3.0/hottest/?tag=mockTag&number=22"))
             {
@@ -77,6 +78,7 @@ public class MockURLStreamHandler extends URLStreamHandler implements URLStreamH
                 System.out.println("Setting mock to user content sample");
                 setMockFile(R.raw.usercontent_sample);
             }
+            */
             else if (inString.equals("http://bootstrap.mockTag/api/v3.0/hottest/?tag=mockDomain&number=22"))
             {
                 System.out.println("Setting mock to hottest sample");

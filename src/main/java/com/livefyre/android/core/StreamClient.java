@@ -15,8 +15,8 @@ public class StreamClient {
             throws MalformedURLException
     {
         final Builder uriBuilder = new Uri.Builder()
-                .appendPath(Config.scheme)
-                .appendPath(Config.streamDomain + "." + Config.getHostname(networkId))
+                .scheme(Config.scheme)
+                .authority(Config.streamDomain + "." + Config.getHostname(networkId))
                 .appendPath("v3.0")
                 .appendPath("collection")
                 .appendPath(collectionId)

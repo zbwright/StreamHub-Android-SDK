@@ -84,11 +84,16 @@ public class MockURLStreamHandler extends URLStreamHandler implements URLStreamH
                 System.out.println("Setting mock to hottest sample");
                 setMockFile(R.raw.hottest_sample);
             }
-            else if (inString.equals("http://bootstrap.mockUserId/api/v3.0/author/mocklftoken/comments/?lftoken=mockDomain"))
+            else if (inString.equals("http://bootstrap.mockDomain/api/v3.0/author/mockUserId/comments/?lftoken=mocklftoken"))
             {
                 System.out.println("Setting mock to user comments sample");
                 // TODO: check that this endpoint corresponds to a currently existing one
                 setMockFile(R.raw.usercontent_sample);
+            }
+            else if (inString.equals("http://stream1.mockDomain/v3.0/collection/mockCollId/mockEventId"))
+            {
+                System.out.println("Setting mock to stream sample");
+                setMockFile(R.raw.stream_sample);
             }
             if (this.mockFile == null) {
                 throw new NullPointerException();

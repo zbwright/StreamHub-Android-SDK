@@ -6,6 +6,7 @@ import android.test.InstrumentationTestCase;
 import com.livefyre.android.core.AdminClient;
 import com.livefyre.android.core.BootstrapClient;
 import com.livefyre.android.core.PublicAPIClient;
+import com.livefyre.android.core.StreamClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,9 +46,9 @@ public class ClientTest extends InstrumentationTestCase {
     }
 
     public void testBootstrapGetInit() {
-        String initEndpoint = null;
+        String endpoint = null;
         try {
-            initEndpoint = BootstrapClient.generateInitEndpoint(
+            endpoint = BootstrapClient.generateInitEndpoint(
                     networkDomain, siteId, articleId);
         } catch (UnsupportedEncodingException e) {
             fail("UnsupportedEncodingException");
@@ -58,7 +59,7 @@ public class ClientTest extends InstrumentationTestCase {
 
         JSONObject data = null;
         try {
-            data = GETJSON.fetchData(initEndpoint);
+            data = GETJSON.fetchData(endpoint);
         } catch (IOException e) {
             fail("IOException");
         } catch (JSONException e) {
@@ -68,10 +69,10 @@ public class ClientTest extends InstrumentationTestCase {
     }
 
     public void testAdminClientWithCollId() {
-        String authEndpoint = null;
+        String endpoint = null;
 
         try {
-            authEndpoint = AdminClient.generateAuthEndpoint(
+            endpoint = AdminClient.generateAuthEndpoint(
                     userToken, collectionId, articleId, siteId, networkDomain);
         } catch (UnsupportedEncodingException e) {
             fail("UnsupportedEncodingException");
@@ -82,7 +83,7 @@ public class ClientTest extends InstrumentationTestCase {
 
         JSONObject data = null;
         try {
-            data = GETJSON.fetchData(authEndpoint);
+            data = GETJSON.fetchData(endpoint);
         } catch (IOException e) {
             fail("IOException");
         } catch (JSONException e) {
@@ -92,9 +93,9 @@ public class ClientTest extends InstrumentationTestCase {
     }
 
     public void testAdminClientWithoutCollId() {
-        String authEndpoint = null;
+        String endpoint = null;
         try {
-            authEndpoint = AdminClient.generateAuthEndpoint(
+            endpoint = AdminClient.generateAuthEndpoint(
                     userToken, null, articleId, siteId, networkDomain);
         } catch (UnsupportedEncodingException e) {
             fail("UnsupportedEncodingException");
@@ -105,7 +106,7 @@ public class ClientTest extends InstrumentationTestCase {
 
         JSONObject data = null;
         try {
-            data = GETJSON.fetchData(authEndpoint);
+            data = GETJSON.fetchData(endpoint);
         } catch (IOException e) {
             fail("IOException");
         } catch (JSONException e) {
@@ -115,17 +116,17 @@ public class ClientTest extends InstrumentationTestCase {
     }
 
     public void testPublicAPIClientUserContent() {
-        String userContentEndpoint = null;
+        String endpoint = null;
         try {
-            userContentEndpoint = PublicAPIClient.generateUserContentEndpoint(
-                    "mockUserId", userToken, networkDomain, null, null);
+            endpoint = PublicAPIClient.generateUserContentEndpoint(
+                    networkDomain, "mockUserId", userToken, null, null);
         } catch (MalformedURLException e) {
             fail("MalformedURLException");
         }
 
         JSONObject data = null;
         try {
-            data = GETJSON.fetchData(userContentEndpoint);
+            data = GETJSON.fetchData(endpoint);
         } catch (IOException e) {
             fail("IOException");
         } catch (JSONException e) {
@@ -135,9 +136,9 @@ public class ClientTest extends InstrumentationTestCase {
     }
 
     public void testPublicAPIClientHotness() {
-        String hotnessEndpoint = null;
+        String endpoint = null;
         try {
-            hotnessEndpoint = PublicAPIClient.generateHottestCollectionsEndpoint(
+            endpoint = PublicAPIClient.generateHottestCollectionsEndpoint(
                     "mockTag", null, networkDomain, 22);
         } catch (MalformedURLException e) {
             fail("MalformedURLException");
@@ -145,7 +146,7 @@ public class ClientTest extends InstrumentationTestCase {
 
         JSONObject data = null;
         try {
-            data = GETJSON.fetchData(hotnessEndpoint);
+            data = GETJSON.fetchData(endpoint);
         } catch (IOException e) {
             fail("IOException");
         } catch (JSONException e) {
@@ -154,5 +155,25 @@ public class ClientTest extends InstrumentationTestCase {
         assertNotNull(data);
     }
 
-    // TODO WriteClient not tested. StreamClient not tested.
+    public void testStreamClientFetch() {
+        String endpoint = null;
+        try {
+            //String networkId, String collectionId, String eventId
+            endpoint = StreamClient.generateStreamUrl(
+                    networkDomain, collectionId, "mockEventId");
+        } catch (MalformedURLException e) {
+            fail("MalformedURLException");
+        }
+
+        JSONObject data = null;
+        try {
+            data = GETJSON.fetchData(endpoint);
+        } catch (IOException e) {
+            fail("IOException");
+        } catch (JSONException e) {
+            fail("JSONException");
+        }
+        assertNotNull(data);
+    }
+    // TODO WriteClient not tested.
 }

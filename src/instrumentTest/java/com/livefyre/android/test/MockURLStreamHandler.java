@@ -90,15 +90,21 @@ public class MockURLStreamHandler extends URLStreamHandler implements URLStreamH
                 // TODO: check that this endpoint corresponds to a currently existing one
                 setMockFile(R.raw.usercontent_sample);
             }
+            // Stream client
             else if (inString.equals("http://stream1.mockDomain/v3.0/collection/mockCollId/mockEventId"))
             {
                 System.out.println("Setting mock to stream sample");
                 setMockFile(R.raw.stream_sample);
             }
+            // Write client
+            else if (inString.equals("http://quill.mockDomain/api/v3.0/collection/mockCollId/post/?lftoken=mocklftoken"))
+            {
+                System.out.println("Setting mock to post sample");
+                setMockFile(R.raw.post_sample);
+            }
             if (this.mockFile == null) {
                 throw new NullPointerException();
             }
-            // Write Client...
         }
 
         @Override

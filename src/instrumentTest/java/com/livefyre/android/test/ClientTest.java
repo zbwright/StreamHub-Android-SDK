@@ -7,6 +7,7 @@ import com.livefyre.android.core.AdminClient;
 import com.livefyre.android.core.BootstrapClient;
 import com.livefyre.android.core.PublicAPIClient;
 import com.livefyre.android.core.StreamClient;
+import com.livefyre.android.core.WriteClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -158,7 +159,6 @@ public class ClientTest extends InstrumentationTestCase {
     public void testStreamClientFetch() {
         String endpoint = null;
         try {
-            //String networkId, String collectionId, String eventId
             endpoint = StreamClient.generateStreamUrl(
                     networkDomain, collectionId, "mockEventId");
         } catch (MalformedURLException e) {
@@ -175,5 +175,24 @@ public class ClientTest extends InstrumentationTestCase {
         }
         assertNotNull(data);
     }
-    // TODO WriteClient not tested.
+
+    public void testWriteClientPost() {
+        String endpoint = null;
+        try {
+            endpoint = WriteClient.generateWriteURL(
+                    networkDomain, collectionId, userToken);
+        } catch (MalformedURLException e) {
+            fail("MalformedURLException");
+        }
+
+        JSONObject data = null;
+        try {
+            data = GETJSON.fetchData(endpoint);
+        } catch (IOException e) {
+            fail("IOException");
+        } catch (JSONException e) {
+            fail("JSONException");
+        }
+        assertNotNull(data);
+    }
 }

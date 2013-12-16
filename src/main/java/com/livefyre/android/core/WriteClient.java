@@ -7,6 +7,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 public class WriteClient {
     public static void likeContent(String networkId,
@@ -51,6 +52,25 @@ public class WriteClient {
                 new RequestParams("collection_id", collectionId), handler);
     }
 
+    public static String generateWriteURL(String networkId,
+                                          String collectionId,
+                                          String userToken)
+            throws MalformedURLException
+    {
+        final Builder uriBuilder = new Uri.Builder()
+                .scheme(Config.scheme)
+                .authority(Config.quillDomain + "." + Config.getHostname(networkId))
+                .appendPath("api")
+                .appendPath("v3.0")
+                .appendPath("collection")
+                .appendPath(collectionId)
+                .appendPath("post")
+                .appendPath("")
+                .appendQueryParameter("lftoken", userToken);
+
+        return uriBuilder.toString();
+    }
+
     /**
      * Post content to a Livefyre collection.
      *
@@ -68,29 +88,18 @@ public class WriteClient {
     public static void postContent(String networkId,
                                    String collectionId,
                                    String parentId,
-                                   String token,
+                                   String userToken,
                                    String body,
                                    JsonHttpResponseHandler handler)
+    throws MalformedURLException
     {
-
-        // Build the URL
-        final Builder uriBuilder = new Uri.Builder()
-                .scheme(Config.scheme)
-                .authority(Config.quillDomain + "." + Config.getHostname(networkId))
-                .appendPath("api")
-                .appendPath("v3.0")
-                .appendPath("collection")
-                .appendPath(collectionId)
-                .appendPath("post")
-                .appendPath("")
-                .appendQueryParameter("lftoken", token);
-
         // add body parameters
         RequestParams bodyParams = new RequestParams();
         bodyParams.put("body", body);
         if (parentId != null && parentId.length() != 0) {
             bodyParams.put("parent_id", parentId);
         }
-        HttpClient.client.post(uriBuilder.toString(), bodyParams, handler);
+        HttpClient.client.post(generateWriteURL(networkId, collectionId, userToken),
+                bodyParams, handler);
     }
 }

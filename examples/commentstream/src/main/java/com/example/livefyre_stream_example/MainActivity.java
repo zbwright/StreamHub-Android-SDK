@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         try {
-            BootstrapClient.getInit("networkId", "siteId", "articleId", new InitCallback());
+            BootstrapClient.getInit("labs.fyre.co", "320568", "custom-1379372287037", new InitCallback());
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 EditText editText = (EditText) findViewById(R.id.editText);
 
-                WriteClient.postContent("networkId", "collectionId", "parentId (optional)", "token",
+                WriteClient.postContent("labs.fyre.co", "47466506", null, "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJkb21haW4iOiAibGFicy5meXJlLmNvIiwgImV4cGlyZXMiOiAxMzk0OTI3MDUzLjg3MjgxMiwgInVzZXJfaWQiOiAiY29tbWVudGVyXzAifQ.yTlPHtMLSPzNh0UJTSdM5zUf7XzAM2aA6mSnmR1UwxY",
                         editText.getText().toString(), new PostCommentCallback());
             }
         });

@@ -6,11 +6,15 @@ group = "com.livefyre"
 
 
 repositories {
-    mavenLocal()
+    //mavenLocal()
+    mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.6'
+    gradleVersion = '1.8'
 }
 
 android {
@@ -34,12 +38,17 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.4'
+        classpath 'com.android.tools.build:gradle:0.6.+'
     }
 }
 
 dependencies {
-    compile files('libs/android-async-http-1.4.2.jar')
+    //compile fileTree(dir: 'libs', include: '*.jar')
+    //compile files('libs/android-async-http-1.4.4.jar')
+    //compile('com.loopj.android:android-async-http:1.4.4@aar') {
+    //    exclude group: 'com.android.support', module: 'support-v4'
+    //}
+    compile 'com.loopj.android:android-async-http:1.4.4@jar'
 }
 
 uploadArchives {

@@ -19,7 +19,7 @@ Depending on your development environment, build the library as follows:
 Run `./gradlew install` and add the following to your build.gradle:
 
     dependencies {
-        compile 'com.livefyre:StreamHub-Android-SDK:0.0.1'
+        compile 'com.livefyre:StreamHub-Android-SDK:0.1.1'
     }
 
 #### Other environments
@@ -47,12 +47,12 @@ By default, the library uses the Livefyre production environment. To configure i
 The first step in building an application will be to authenticate a user. Information (including a sequence diagram) on how to construct an LFToken can be found [`here`](https://github.com/Livefyre/livefyre-docs/wiki/Livefyre-authentication-token).
 
 ## Retrieving Collections and New Data
-The [`BootstrapClient`](https://github.com/Livefyre/StreamHub-Android-SDK/blob/gradle/src/main/java/com/livefyre/android/core/BootstrapClient.java) is used to retrieve initial data for a collection.
-To stream new data, use the [`StreamClient`](https://github.com/Livefyre/StreamHub-Android-SDK/blob/gradle/src/main/java/com/livefyre/android/core/StreamClient.java). Implementations should continue to long poll via the stream client to keep data flowing to their application in real time.
+The [`BootstrapClient`](https://github.com/Livefyre/StreamHub-Android-SDK/blob/rc/src/main/java/com/livefyre/android/core/BootstrapClient.java) is used to retrieve initial data for a collection.
+To stream new data, use the [`StreamClient`](https://github.com/Livefyre/StreamHub-Android-SDK/blob/rc/src/main/java/com/livefyre/android/core/StreamClient.java). Implementations should continue to long poll via the stream client to keep data flowing to their application in real time.
 
 ## Sending Data to Livefyre
 
-The [`WriteClient`](https://github.com/Livefyre/StreamHub-Android-SDK/blob/gradle/src/main/java/com/livefyre/android/core/WriteClient.java) is used to send data to Livefyre (like, new comments, etc). All methods require a user token.
+The [`WriteClient`](https://github.com/Livefyre/StreamHub-Android-SDK/blob/rc/src/main/java/com/livefyre/android/core/WriteClient.java) is used to send data to Livefyre (like, new comments, etc). All methods require a user token.
 Responses to actions sent via the WriteClient will be sent directly back. They will also be sent down via the StreamClient, so be sure to check for duplicate content.
 
 # Clients

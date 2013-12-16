@@ -29,5 +29,5 @@ buildscript {
 }
 
 dependencies {
-    compile 'com.livefyre:StreamHub-Android-SDK:0.0.1'
+    compile 'com.livefyre:StreamHub-Android-SDK:0.1.1'
 }

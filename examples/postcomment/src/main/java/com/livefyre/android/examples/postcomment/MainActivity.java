@@ -13,6 +13,8 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -25,9 +27,12 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 EditText editText = (EditText) findViewById(R.id.editText);
+                try {
+                    WriteClient.postContent("labs.fyre.co", "47466506", null, "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJkb21haW4iOiAibGFicy5meXJlLmNvIiwgImV4cGlyZXMiOiAxNDEwOTkzNzg1LjMyNzgwNCwgInVzZXJfaWQiOiAic3lzdGVtIn0.7ErE6F0l87f8pAIshjQyZcoxwDuGACotQdaby0qt17A",
+                            editText.getText().toString(), new PostCommentCallback());
+                } catch (MalformedURLException e) {
 
-                WriteClient.postContent("labs.fyre.co", "47466506", null, "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJkb21haW4iOiAibGFicy5meXJlLmNvIiwgImV4cGlyZXMiOiAxMzk0OTI3MDUzLjg3MjgxMiwgInVzZXJfaWQiOiAiY29tbWVudGVyXzAifQ.yTlPHtMLSPzNh0UJTSdM5zUf7XzAM2aA6mSnmR1UwxY",
-                        editText.getText().toString(), new PostCommentCallback());
+                }
             }
         });
     }

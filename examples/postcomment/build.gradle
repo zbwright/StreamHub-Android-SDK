@@ -7,7 +7,6 @@ repositories {
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots/"
     }
-    maven { url '/Users/livefyre/.m2/repository/' }
 }
 
 task wrapper(type: Wrapper) {

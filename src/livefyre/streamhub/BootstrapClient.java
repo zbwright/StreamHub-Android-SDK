@@ -97,7 +97,7 @@ public class BootstrapClient {
         // Build the URL
         Builder uriBuilder = new Uri.Builder()
                 .scheme(Config.scheme)
-                .authority(Config.bootstrapDomain + "." + Config.getHostname(networkId))
+                .authority(Config.bootstrapDomain + "." + Config.networkId)
                 .appendPath("bs3")
                 .appendPath(networkId)
                 .appendPath(siteId)

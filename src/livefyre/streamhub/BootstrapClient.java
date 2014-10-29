@@ -1,4 +1,4 @@
-package com.livefyre.android.core;
+package livefyre.streamhub;
 
 import android.net.Uri;
 import android.net.Uri.Builder;
@@ -7,6 +7,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import android.util.Log;
 
 /**
  * @author zjj
@@ -49,9 +50,11 @@ public class BootstrapClient {
                                AsyncHttpResponseHandler handler,
                                Object... pageNumber)
             throws UnsupportedEncodingException
-    {
+    {                                                                                   
         final String bootstrapEndpoint = generateBootstrapEndpoint(networkId, siteId, articleId, pageNumber);
+        Log.d("SDK","Before call "+initEndpoint);
         HttpClient.client.get(bootstrapEndpoint, handler);
+        Log.d("SDK","After call");
     }
 
     /**

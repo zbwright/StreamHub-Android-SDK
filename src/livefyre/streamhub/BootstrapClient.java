@@ -40,6 +40,7 @@ public class BootstrapClient {
      * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
      * @param siteId    The Id of the article's site.
      * @param articleId The Id of the collection's article.
+    * @param opts Optional parameters to pass in. Currently takes in pageNumber param for bootstrap page number.
      * @param handler   Response handler
      * @throws UnsupportedEncodingException
      * @throws MalformedURLException
@@ -48,10 +49,10 @@ public class BootstrapClient {
                                String siteId,
                                String articleId,
                                AsyncHttpResponseHandler handler,
-                               Object... pageNumber)
+                               Map<String, Object>... opts)
             throws UnsupportedEncodingException
-    {                                                                                   
-        final String bootstrapEndpoint = generateBootstrapEndpoint(networkId, siteId, articleId, pageNumber);
+    {
+        final String bootstrapEndpoint = generateBootstrapEndpoint(networkId, siteId, articleId, opts);
         Log.d("SDK","Before call "+bootstrapEndpoint);
         HttpClient.client.get(bootstrapEndpoint, handler);
         Log.d("SDK","After call");
@@ -81,6 +82,7 @@ public class BootstrapClient {
      * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
      * @param siteId    The Id of the article's site.
      * @param articleId The Id of the collection's article.
+     * @param opts Optional parameters to pass in. Currently takes in pageNumber param for Bootstrap page number.
      * @return The init endpoint with the specified parameters.
      * @throws UnsupportedEncodingException
      * @throws MalformedURLException
@@ -88,7 +90,7 @@ public class BootstrapClient {
     public static String generateBootstrapEndpoint(String networkId,
                                               String siteId,
                                               String articleId,
-                                              Object... pageNumber)
+                                              Map<String, Object>... opts)
             throws UnsupportedEncodingException
     {
         // Casting
@@ -103,12 +105,12 @@ public class BootstrapClient {
                 .appendPath(siteId)
                 .appendPath(article64);
 
-        if (pageNumber.length <= 0) {
+        if (opts.length <= 0) {
             uriBuilder.appendPath("init");
         }
         else {
-            if(pageNumber[0] instanceof Integer) {
-                String page = pageNumber[0] + ".json";
+            if(opts["pageNumber"] instanceof Integer) {
+                String page = opts["pageNumber"] + ".json";
                 uriBuilder.appendPath(page);
             }
             else {

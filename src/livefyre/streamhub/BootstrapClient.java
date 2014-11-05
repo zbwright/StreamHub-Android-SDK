@@ -40,7 +40,7 @@ public class BootstrapClient {
      * @param networkId The collection's network as identified by domain, i.e. livefyre.com.
      * @param siteId    The Id of the article's site.
      * @param articleId The Id of the collection's article.
-    * @param opts Optional parameters to pass in. Currently takes in pageNumber param for bootstrap page number.
+     * @param opts Optional parameters to pass in. Currently takes in pageNumber param for bootstrap page number.
      * @param handler   Response handler
      * @throws UnsupportedEncodingException
      * @throws MalformedURLException

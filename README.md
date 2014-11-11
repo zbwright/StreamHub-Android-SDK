@@ -1,3 +1,4 @@
+
 StreamHub-Android-SDK
 =====================
 
@@ -5,16 +6,61 @@ Make Android apps powered by Livefyre StreamHub
 
 Read the docs: http://livefyre.github.com/StreamHub-Android-SDK/
 
-# Usage
+This StreamHub-Android-SDK can be used for both Eclipse and Android Studio
 
-Clone the repo and drop the StreamHub-Android-SDK.jar file into your project's libs folder
+**Steps to use in Eclipse:**
 
-Or, clone the repo and add the streamhub-android-sdk as an Android dependency
+Get the fresh StreamHub-Android-SDK from Github
 
-You can customize configurations in [Config.java](https://github.com/Livefyre/StreamHub-Android-SDK/blob/master/src/livefyre/streamhub/Config.java) file. This SDK will work for both [Comments](https://github.com/Livefyre/StreamHub-Android-SDK/tree/master/examples/commentstream) and [Reviews](https://github.com/Livefyre/StreamHub-Android-Reviews-App) applications of Livefyre streamhub.
-## Packages
+1.	To import StreamHub-Android-SDK into your workspace go to, File > Import Project > General > Existing Project into Workspace 
 
-At the time of writing, the StreamHub Android SDK exposes classes for requesting and sending to the StreamHub APIs. It make no assumptions about how to view the content.
+2. 	Then browse and select StreamHub-Android-SDK, now it will show in package explorar
+
+3.	Right click on your project and select properties then select android tab.
+
+4.	Under Library section, select Add button then select StreamHub-Android-SDK from the list of libraries
+
+5. Click on Apply and OK.
+
+____________
+
+
+**Steps to use in Android Studio:**
+
+Get the fresh StreamHub-Android-SDK from Github
+
+1.	Right click on your project and select 'Open Module Settings'
+
+2.	select **'+'** on the top left corner of window.
+
+3.	Select "Import Existing Project"
+
+4.   Browse and select StreamHub-Android-SDK.It may asks for conversion of SDK to gradle version. then select next and finish.
+
+5.	Add following dependency to build.gradle under dependencies as follows
+
+```
+dependencies {
+...
+compile project(':streamHubAndroidSDK')
+}
+
+```
+**Make sure that the following line is in settings.gradle**
+
+```
+include ':streamHubAndroidSDK'
+```
+
+You can customise configurations in [Config.java](https://github.com/Livefyre/StreamHub-Android-SDK/blob/master/src/livefyre/streamhub/Config.java) file. This SDK will work for both [Comments](https://github.com/Livefyre/StreamHub-Android-SDK/tree/master/examples/commentstream) and [Reviews](https://github.com/Livefyre/StreamHub-Android-Reviews-App) applications of Livefyre streamhub.
+
+
+#### Sample Application for Reviews:
+
+You can get [`"Livefyre Streamhub Reviews Example" form here `](https://github.com/Livefyre/StreamHub-Android-Reviews-App)
+
+![alt tag](http://s28.postimg.org/49bl5i7yl/screenshot.png)
+
 
 ### Clients
 
@@ -28,9 +74,6 @@ The StreamHub Android SDK exposes several Client classes that can be used to req
 
 * [`WriteClient`](http://livefyre.github.io/StreamHub-Android-SDK/com/livefyre/streamhub_android_sdk/WriteClient.html) - Post content, flag content, like content in a collection
 
-# Deving
-
-Clone the project, run the tests, and notice a few undocumented classes. Kindly treat the project as alpha code.
 
 # License
 

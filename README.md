@@ -51,12 +51,12 @@ compile project(':streamHubAndroidSDK')
 include ':streamHubAndroidSDK'
 ```
 
-You can customize configurations in [Config.java](https://github.com/Livefyre/StreamHub-Android-SDK/blob/master/src/livefyre/streamhub/Config.java) file. This SDK will work for both [Comments](https://github.com/Livefyre/StreamHub-Android-SDK/tree/master/examples/commentstream) and [Reviews](https://github.com/Livefyre/StreamHub-Android-Reviews-App) applications of Livefyre streamhub.
-
+Note: You can customize configurations in [Config.java](https://github.com/Livefyre/StreamHub-Android-SDK/blob/master/src/livefyre/streamhub/Config.java) file.
 
 # Sample App
 
 Reviews Demonstrative Example: https://github.com/Livefyre/StreamHub-Android-Reviews-App
+Comments Demonstrative Example: https://github.com/Livefyre/StreamHub-Android-SDK/tree/master/examples/commentstream
 
 # SDK Client Classes
 

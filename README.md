@@ -42,7 +42,6 @@ Get the fresh StreamHub-Android-SDK from Github
 dependencies {
   compile project(':streamHubAndroidSDK')
 }
-
 ```
 **Make sure that the following line is in settings.gradle**
 

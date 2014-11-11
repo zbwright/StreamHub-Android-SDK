@@ -51,7 +51,7 @@ compile project(':streamHubAndroidSDK')
 include ':streamHubAndroidSDK'
 ```
 
-Note: You can customize configurations in [Config.java](https://github.com/Livefyre/StreamHub-Android-SDK/blob/master/src/livefyre/streamhub/Config.java) file.
+Note: You can customize configurations from within   [Config.java](https://github.com/Livefyre/StreamHub-Android-SDK/blob/master/src/livefyre/streamhub/Config.java).
 
 # Sample App
 

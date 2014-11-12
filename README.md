@@ -36,14 +36,15 @@ Get the fresh StreamHub-Android-SDK from Github
 4.  Browse and select StreamHub-Android-SDK
  * Android Studio may request to convert the SDK to gradle version; if this occurs, select next and finish
 
-5.  Add the following dependency to build.gradle under dependencies as follows:
+5.  Add the following dependency, go to project folder(StreamHub-Android-Reviews-App) -> "app" folder -> "build.gradle" file under dependencies as follows:
 
 ```
 dependencies {
+    ...
   compile project(':streamHubAndroidSDK')
 }
 ```
-**Make sure that the following line is in settings.gradle**
+**Make sure that the following line in project folder(StreamHub-Android-Reviews-App) ->settings.gradle file**
 
 ```
 include ':streamHubAndroidSDK'

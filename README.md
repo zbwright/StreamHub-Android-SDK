@@ -12,7 +12,9 @@ This StreamHub-Android-SDK can be used for both Eclipse and Android Studio
 
 Get the fresh StreamHub-Android-SDK from Github
 
-1.	To import StreamHub-Android-SDK into your workspace go to: File > Import Project > General > Existing Project into Workspace 
+1.  Start with an existing project or create a new one
+
+1. 	To import StreamHub-Android-SDK into your workspace go to: File > Import Project > General > Existing Project into Workspace 
 2. 	Browse and select StreamHub-Android-SDK; it should now show in the package explorer
 
 3.	Right click on your project and select properties then select Android tab
@@ -27,6 +29,8 @@ ____________
 
 Get the fresh StreamHub-Android-SDK from Github
 
+1.  Start with an existing project or create a new one
+
 1.	Right click on your project and select 'Open Module Settings'
 
 2.	Select the **'+'** button on the top left corner of window
@@ -40,7 +44,6 @@ Get the fresh StreamHub-Android-SDK from Github
 
 ```
 dependencies {
-    ...
   compile project(':streamHubAndroidSDK')
 }
 ```
@@ -54,8 +57,9 @@ Note: You can customize configurations from within   [Config.java](https://githu
 
 # Sample App
 
-Reviews Demonstrative Example: https://github.com/Livefyre/StreamHub-Android-Reviews-App
-Comments Demonstrative Example: https://github.com/Livefyre/StreamHub-Android-SDK/tree/master/examples/commentstream
+* Reviews Demonstrative Example: https://github.com/Livefyre/StreamHub-Android-Reviews-App
+
+* Comments Demonstrative Example: https://github.com/Livefyre/StreamHub-Android-SDK/tree/master/examples/commentstream
 
 # SDK Client Classes
 

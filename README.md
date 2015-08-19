@@ -75,7 +75,7 @@ The StreamHub Android SDK exposes several Client classes that can be used to req
 
 # License
 
-Copyright (c) 2015 Livefyre
+Copyright (c) 2015 Livefyre, Inc.
 
 Licensed under the MIT License
 
